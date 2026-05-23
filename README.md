@@ -2,7 +2,7 @@
 
 > Find the keyboard layout that fits *your* fingers — not someone else's benchmark.
 
-A React app that runs a short (~3.5 min) typing test disguised as natural pseudowords, measures your comfort across 12 finger-motion categories, and recommends the top 5 keyboard layouts from a database of 41 optimized layouts.
+A React app that runs a short typing test disguised as natural pseudowords, measures your comfort across 12 finger-motion categories, and recommends the top 5 keyboard layouts from a database of 41 optimized layouts.
 
 ---
 
@@ -71,7 +71,8 @@ npm run test:run   # Run tests once (CI mode)
 
 ---
 
-## Project Structure
+<details>
+<summary>📁 Project Structure</summary>
 
 ```
 src/
@@ -114,9 +115,12 @@ src/
     └── controllers/                # LayoutBrowser + TestStream controller tests
 ```
 
+</details>
+
 ---
 
-## Development Workflow
+<details>
+<summary>🏗️ Development Workflow</summary>
 
 ### Architecture: Controller + View Pattern
 
@@ -139,7 +143,7 @@ This makes the view trivially restyable and the controller testable without moun
 
 ### Adding a new layout
 
-Edit `src/data/layouts.json` — every entry must conform to the `Layout` interface in `src/types.ts`:
+Edit `src/data/layouts.json` — every entry must conform to the `Layout` interface in `src/types.ts`. Stats should be fetched from [cyanophage.github.io/table.html](https://cyanophage.github.io/table.html).
 
 ```jsonc
 {
@@ -147,29 +151,27 @@ Edit `src/data/layouts.json` — every entry must conform to the `Layout` interf
   "name": "My Layout",
   "source": "https://...",
   "cyanophageRef": "my-layout",
-  "keys": "qwfpbjluy;arstgmneio'zxcdvkh,./",  // exactly 30 chars, row-major
+  "keys": "qwfpbjluy;arstgmneio'zxcdvkh,./",
   "formFactors": ["ansi"],
   "requiresThumbCluster": false,
   "stats": {
     "sfbPct": 0.68,
-    "skipBigramPct": 5.4,
-    "lsbPct": 1.1,
-    "scissorsPct": 0.3,
-    "altPct": 37.2,
-    "rollInPct": 21.3,
-    "rollOutPct": 15.8,
-    "redirectPct": 8.1,
-    "weakRedirectPct": 2.1,
-    "offHomePinkyPct": 2.3
+    "pinkyScissorsPct": 0.08,
+    "offHomePinkyPct": 2.3,
+    "effort": 520.0,
+    "distance": 191.0,
+    "_dataSource": "cyanophage"
+    // ... all other stats from the table
   }
 }
 ```
 
-Stats should be fetched from [cyanophage.github.io](https://cyanophage.github.io).
+</details>
 
 ---
 
-## AI Agent Workflow
+<details>
+<summary>🤖 AI Agent Workflow</summary>
 
 This project uses **GitHub Copilot custom agents** in VS Code to assist with each phase of the build. The agents live in `.github/agents/` and are auto-discovered by VS Code Copilot Chat.
 
@@ -178,7 +180,7 @@ This project uses **GitHub Copilot custom agents** in VS Code to assist with eac
 | Agent | File | Purpose |
 |-------|------|---------|
 | **KLP Builder** | `klp-builder.agent.md` | Orchestrates the full build across all phases; reads `BUILD_STATE.md` to resume from the correct phase |
-| **KLP Layout Data** | `klp-data.agent.md` | Populates `layouts.json` for all 41 layouts by fetching stats live from cyanophage.github.io |
+| **KLP Layout Data** | `klp-data.agent.md` | Fetches all 41 layout stats from `cyanophage.github.io/table.html`; cross-validates with derived estimates |
 | **KLP Sequences** | `klp-sequences.agent.md` | Designs the 101 pseudoword test sequences across 12 motion categories |
 | **KLP Components** | `klp-components.agent.md` | Builds all React components and pages using the Controller pattern |
 | **KLP Scoring** | `klp-scoring.agent.md` | Implements the scoring engine, normalizers, radar chart, and results page |
@@ -186,63 +188,70 @@ This project uses **GitHub Copilot custom agents** in VS Code to assist with eac
 ### How to use agents in VS Code
 
 1. Open **GitHub Copilot Chat** (`Ctrl/Cmd + Shift + I`)
-2. Click the agent picker (the `@` icon or model selector)
-3. Select the agent you want (e.g. `KLP Builder`)
-4. Type your instruction, e.g.:
+2. Click the agent picker and select the agent you want (e.g. `KLP Builder`)
+3. Type your instruction:
    - `"Build Phase 0 — scaffold the project"`
    - `"Populate layouts.json for the first 10 standard layouts"`
    - `"Write the normalizer.ts utility with tests"`
 
 > **Tip**: Always start with `KLP Builder` — it reads `BUILD_STATE.md` and tells you exactly which phase to run next.
 
-### Build State
+### Build State & Memory
 
-`.github/BUILD_STATE.md` tracks phase progress. After each phase completes (and `npm run build` passes), the builder agent updates this file. If a session is interrupted, starting a new session and invoking `KLP Builder` will resume from the last completed phase.
+`.github/BUILD_STATE.md` tracks phase progress (⬜ pending / 🔄 in progress / ✅ done / ❌ failed). If a session is interrupted, `KLP Builder` resumes from the last completed phase automatically.
 
----
+### Instructions & Conventions
 
-## Instructions & Conventions
-
-Auto-loaded instructions live in `.github/instructions/` and apply automatically when you edit matching files:
+Auto-loaded instructions apply when you edit matching files:
 
 | File | Applies to | What it enforces |
 |------|-----------|-----------------|
-| `klp-react-conventions.instructions.md` | `src/**/*.{ts,tsx}` | Controller pattern, extracted functions, Tailwind conventions, testing patterns |
-| `klp-types.instructions.md` | `src/**/*.{ts,tsx}` | Canonical TypeScript interfaces — import from `src/types.ts`, never redefine |
+| `klp-react-conventions.instructions.md` | `src/**/*.{ts,tsx}` | Controller pattern, extracted functions, Tailwind, testing |
+| `klp-types.instructions.md` | `src/**/*.{ts,tsx}` | Canonical TypeScript interfaces — import from `src/types.ts` |
 
-Project-wide context is in `.github/copilot-instructions.md` (always loaded).
+### Scripts
 
----
-
-## Scripts
-
-| Script | Location | Purpose |
-|--------|----------|---------|
-| `validate-ts.sh` | `.github/scripts/` | PostToolUse hook — runs `tsc --noEmit` after every `.ts/.tsx` file edit; blocks the agent if TypeScript errors are found |
-
-The validation script is automatically invoked by the `KLP Builder` agent's `PostToolUse` hook. It only runs if `tsconfig.json` exists (i.e. after Phase 0 scaffold). You can also run it manually:
+`validate-ts.sh` (`.github/scripts/`) is a PostToolUse hook — runs `tsc --noEmit` after every `.ts/.tsx` file edit and blocks the agent if TypeScript errors are found. Runs automatically; can also be called manually:
 
 ```bash
 bash .github/scripts/validate-ts.sh
 ```
 
+</details>
+
 ---
 
-## Scoring Algorithm (brief)
+<details>
+<summary>📊 Scoring Algorithm</summary>
 
-1. **Per-category composite score** — for each of 12 motion categories, compute `0.6 × wpmScore + 0.4 × accuracyScore` (median-based, normalized across all categories)
-2. **Layout compatibility score** — for each of 41 layouts, multiply user comfort scores against the layout's normalized stats (positive categories rewarded, negative categories penalized)
-3. **QWERTY similarity toggle** — optionally blend in `0.2 × QWERTYOverlap` for easier transition
+Fully objective — speed and accuracy only, no subjective ratings.
+
+1. **Per-category composite score** — for each of 12 motion categories:
+   ```
+   compositeScore = 0.6 × wpmScore + 0.4 × accuracyScore
+   ```
+   Both normalized using median across 8 sequences per category (robust against outliers).
+
+2. **Layout compatibility score** — for each of 41 layouts:
+   - Positive categories (alt, rollIn, rollOut, thumbAlt): `userScore × norm(layoutStat)`
+   - Negative categories (sfbStrong/Weak, lsb, scissors, redirect, pinky, skipBigram): `(1 - userScore) × (1 - norm(layoutStat))`
+   - `scissorsPinky` uses `pinkyScissorsPct` directly from cyanophage; `scissorsCenter` uses `scissorsPct - pinkyScissorsPct`
+
+3. **QWERTY similarity toggle** — optionally blend `0.2 × QWERTYOverlap` for easier transition
+
 4. **Rank** — top 5 by final score; tie-break by lowest `sfbPct`
 
-See `src/utils/scoring.ts` for the full implementation.
+Layout stats sourced from [cyanophage.github.io/table.html](https://cyanophage.github.io/table.html) and cross-validated with derived estimates. See `src/utils/scoring.ts` for the full implementation.
+
+</details>
 
 ---
 
 ## Contributing
 
 1. Branch from `main`: `git checkout -b feat/your-feature`
-2. Follow the [Controller pattern](#architecture-controller--view-pattern) for new components
+2. Follow the [Controller pattern](#️-development-workflow) for new components
 3. All pure utility functions require unit tests in `src/__tests__/utils/`
 4. Run `npm test` and `npm run build` before opening a PR
 5. PR into `main`
+
