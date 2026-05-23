@@ -26,6 +26,13 @@ src/
 - `fingerMap` keys use lowercase characters
 - Layout `keys` field = 30-char row-major string: top→home→bottom, L→R
 
+## Code Style — Functions over Inline
+- Extract any logic block > 3 lines into a named function
+- No inline logic in JSX `return` — extract to named variables/functions above `return`
+- Business logic handlers extracted to named functions, not anonymous inline arrows
+- Utility functions in `src/utils/`, stateful logic in `src/hooks/`
+- Pure functions for all scoring/normalization — no side effects
+
 ## Key Domain Types
 ```ts
 // Finger indices: 0=LP, 1=LR, 2=LM, 3=LI, 4=LII, 5=RII, 6=RI, 7=RM, 8=RR, 9=RP, 10=LThumb, 11=RThumb
