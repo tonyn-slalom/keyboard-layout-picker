@@ -10,11 +10,17 @@
 ## Project Structure
 ```
 src/
+  context/TestResultsContext.tsx        ← useReducer global state for test results
   data/layouts.json
-  components/KeyboardViz/  LayoutBrowser/  TypingTest/  Results/
+  components/
+    KeyboardViz/                        ← Key, AnsiLayout, OrthoLayout, ColumnarLayout, KeyboardViz
+    LayoutBrowser/                      ← LayoutBrowser.controller.ts + LayoutBrowser.tsx + LayoutCard, LayoutDetail, LayoutComparison
+    TypingTest/                         ← TestStream.controller.ts + TestStream.tsx + WordDisplay
+    Results/                            ← RadarChart, RecommendationCard
   utils/fingerMap.ts  sequences.ts  scoring.ts  normalizer.ts  qwertySimilarity.ts
-  hooks/useTypingTest.ts  useTimer.ts
-  pages/HomePage.tsx  BrowsePage.tsx  TestPage.tsx  ResultsPage.tsx
+  hooks/useTimer.ts
+  pages/HomePage.tsx  BrowsePage.tsx  TestPage.tsx  ResultsPage.controller.ts  ResultsPage.tsx
+  types.ts
   App.tsx  main.tsx
 ```
 
@@ -32,6 +38,13 @@ src/
 - Business logic handlers extracted to named functions, not anonymous inline arrows
 - Utility functions in `src/utils/`, stateful logic in `src/hooks/`
 - Pure functions for all scoring/normalization — no side effects
+
+## Architecture Pattern — Controller + View
+- Complex components (≥2 state pieces or non-trivial handlers) use the Controller pattern:
+  - `Component.controller.ts` — `useComponentController()` hook returns typed object with all state/handlers
+  - `Component.tsx` — pure JSX, calls `useComponentController()`, no business logic
+- Required for: `TestStream`, `LayoutBrowser`, `LayoutComparison`, `ResultsPage`, `LayoutDetail`
+- Global cross-page state (test results) via `Context + useReducer` in `src/context/`
 
 ## Key Domain Types
 ```ts

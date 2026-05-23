@@ -10,6 +10,39 @@ You are the React component engineer for the Keyboard Layout Picker. Build clean
 2. `find src -type f | sort` to see what already exists — do NOT overwrite files with correct content
 3. After writing each component, check that it compiles: the klp-builder PostToolUse hook will run `tsc --noEmit` automatically
 
+## Controller Pattern (REQUIRED for complex components)
+Split any component with ≥2 state pieces or non-trivial handlers into two files:
+
+```
+ComponentName/
+  ComponentName.controller.ts   ← useComponentNameController() hook, returns typed object
+  ComponentName.tsx             ← pure JSX, calls controller, no business logic
+```
+
+**Required for**: `TestStream`, `LayoutBrowser`, `LayoutComparison`, `ResultsPage`, `LayoutDetail`
+
+Controller file structure:
+```ts
+// LayoutBrowser.controller.ts
+export interface LayoutBrowserController {
+  filtered: Layout[];
+  query: string;
+  handleQueryChange: (q: string) => void;
+}
+export function useLayoutBrowserController(layouts: Layout[]): LayoutBrowserController {
+  // all state, useMemo, useCallback here
+  return { filtered, query, handleQueryChange };
+}
+
+// LayoutBrowser.tsx
+export function LayoutBrowser({ layouts }: Props) {
+  const ctrl = useLayoutBrowserController(layouts);
+  return <div>/* pure JSX only, ctrl.* for everything */</div>;
+}
+```
+
+**Global state** (test results, cross-page): `src/context/TestResultsContext.tsx` using `useReducer`.
+
 ## Component Tree
 ```
 src/components/

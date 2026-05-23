@@ -21,12 +21,64 @@ const sortedBySfb = sortByStat(standardLayouts, 'sfbPct');
 return <div>{sortedBySfb.map(l => <Card key={l.id} layout={l} />)}</div>;
 ```
 
-## Components
-- Functional components only; no class components
-- Named exports for all components except page-level (pages use default export)
-- Props typed with `interface`, not `type`
-- `React.memo` on list items (LayoutCard, RecommendationCard, Key)
-- Each component file should have one default export component + any private helper functions/subcomponents above it
+## Architecture Patterns
+
+### Controller Pattern (primary pattern for complex components)
+Split components with non-trivial logic into two files:
+- `MyComponent.controller.ts` — all state, hooks, derived values, handlers; returns a typed object
+- `MyComponent.tsx` — pure presentation; receives controller output, no business logic
+
+```ts
+// LayoutBrowser.controller.ts
+export interface LayoutBrowserController {
+  filtered: Layout[];
+  query: string;
+  sortKey: SortKey;
+  handleQueryChange: (q: string) => void;
+  handleSortChange: (key: SortKey) => void;
+}
+
+export function useLayoutBrowserController(layouts: Layout[]): LayoutBrowserController {
+  const [query, setQuery] = useState('');
+  const [sortKey, setSortKey] = useState<SortKey>('sfbPct');
+
+  const filtered = useMemo(() => filterAndSort(layouts, query, sortKey), [layouts, query, sortKey]);
+
+  const handleQueryChange = useCallback((q: string) => setQuery(q), []);
+  const handleSortChange = useCallback((key: SortKey) => setSortKey(key), []);
+
+  return { filtered, query, sortKey, handleQueryChange, handleSortChange };
+}
+
+// LayoutBrowser.tsx
+export function LayoutBrowser({ layouts }: LayoutBrowserProps) {
+  const ctrl = useLayoutBrowserController(layouts);
+  return ( /* pure JSX using ctrl.* — no logic here */ );
+}
+```
+
+**When to use the Controller pattern:**
+- Component has ≥2 pieces of state
+- Component has event handlers with non-trivial logic
+- Component derives computed values from props/state
+
+**When to use a plain custom hook instead:**
+- Logic is reusable across multiple components (e.g. `useTimer`, `useMediaQuery`)
+- Logic is simple enough that a controller file would be overkill
+
+**When to use Context + Reducer:**
+- State must be shared across pages (e.g. test results flowing from TestPage → ResultsPage)
+- Use `src/context/TestResultsContext.tsx` with `useReducer`
+
+### File naming
+- `ComponentName.controller.ts` — controller hook (no JSX)
+- `ComponentName.tsx` — view (imports controller, returns JSX)
+- `useXxx.ts` in `src/hooks/` — reusable hooks not tied to a single component
+
+### Components where Controller pattern is required
+`TestStream`, `LayoutBrowser`, `LayoutComparison`, `ResultsPage`, `LayoutDetail`
+
+
 
 ## TypeScript
 - Strict mode; no `any`
