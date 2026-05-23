@@ -24,17 +24,33 @@ export interface FingerEntry {
 // ─── Layouts ─────────────────────────────────────────────────────────────────
 
 export interface LayoutStats {
-  sfbPct:          number;
-  skipBigramPct:   number;
-  lsbPct:          number;
-  scissorsPct:     number;
-  altPct:          number;
-  rollInPct:       number;
-  rollOutPct:      number;
-  redirectPct:     number;
-  weakRedirectPct: number;
-  offHomePinkyPct: number;
-  thumbAltPct?:    number; // thumb-cluster layouts only
+  // ── From cyanophage table (authoritative) ───────────────────────────────
+  // Source: https://cyanophage.github.io/table.html
+  sfbPct:             number;   // same-finger bigrams %
+  skipBigramPct:      number;   // "sfb 2u" column — 2u skip bigrams %
+  skipBigram2Pct:     number;   // "skip bigrams2" column — secondary skip bigram metric
+  lsbPct:             number;   // lateral stretch bigrams %
+  scissorsPct:        number;   // total scissors %
+  pinkyScissorsPct:   number;   // "pinky scissors" — maps to scissorsPinky test category
+  wideScissorsPct:    number;   // "wide scissors" column
+  altPct:             number;   // trigram hand alternation %
+  rollInPct:          number;   // inward rolls %
+  rollOutPct:         number;   // outward rolls %
+  redirectPct:        number;   // trigram redirects %
+  weakRedirectPct:    number;   // weak redirects %
+  offHomePinkyPct:    number;   // "pinky off home" — direct from table, no estimation needed
+  effort:             number;   // total effort score (useful for display/sorting)
+  distance:           number;   // finger travel distance
+  pinkyDist:          number;   // "pinky dist" — pinky-specific distance
+  col56Pct:           number;   // "col5&6" — inner index column usage %
+  thumbAltPct?:       number;   // thumb-cluster layouts only (not in cyanophage table)
+
+  // ── Derived (our own calculation as cross-check) ─────────────────────────
+  _derivedOffHomePinkyPct?:   number;  // our estimate from letter frequencies + keymap
+  _derivedPinkyScissorsPct?:  number;  // our estimate from fingerMap analysis
+  _dataSource:                'cyanophage' | 'derived' | 'mixed';
+  // Set to 'mixed' if |derived - cyanophage| / cyanophage > 0.2 for any stat
+  _notes?:                    string;  // discrepancies, -1 placeholders, manual overrides
 }
 
 export interface Layout {

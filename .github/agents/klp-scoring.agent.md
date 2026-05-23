@@ -49,18 +49,18 @@ const POSITIVE_CATS = {
   thumbAlt:        (l: Layout) => l.stats.thumbAltPct ?? 0,
 };
 const NEGATIVE_CATS = {
-  sfbStrong:       (l: Layout) => l.stats.sfbPct,       // index/middle share the same stat
-  sfbWeak:         (l: Layout) => l.stats.sfbPct,       // ring/pinky — same stat, separate user score
+  sfbStrong:       (l: Layout) => l.stats.sfbPct,            // index/middle — same stat, separate user score
+  sfbWeak:         (l: Layout) => l.stats.sfbPct,            // ring/pinky — same stat, separate user score
   lsb:             (l: Layout) => l.stats.lsbPct,
-  scissorsCenter:  (l: Layout) => l.stats.scissorsPct,  // center fingers share stat
-  scissorsPinky:   (l: Layout) => l.stats.scissorsPct,  // pinky scissors — separate user score
-  redirect:        (l: Layout) => 0.7 * l.stats.redirectPct + 0.3 * l.stats.weakRedirectPct,
-  pinky:           (l: Layout) => l.stats.offHomePinkyPct,
+  scissorsCenter:  (l: Layout) => l.stats.scissorsPct - l.stats.pinkyScissorsPct, // center-only scissors
+  scissorsPinky:   (l: Layout) => l.stats.pinkyScissorsPct,  // direct from cyanophage table — no estimation!
+  redirect:        (l: Layout) => 0.7 * l.stats.redirectPct + 0.3 * (l.stats.weakRedirectPct >= 0 ? l.stats.weakRedirectPct : l.stats.redirectPct * 0.3),
+  pinky:           (l: Layout) => l.stats.offHomePinkyPct,   // direct from cyanophage table — no estimation!
   skipBigram:      (l: Layout) => l.stats.skipBigramPct,
 };
-// Note: sfbStrong and sfbWeak intentionally share the sfbPct stat but carry independent user comfort scores.
-// A layout with low sfbPct benefits from BOTH a high sfbStrong score AND a high sfbWeak score.
-// This correctly double-weights sfb avoidance for users who are bothered by both strong and weak SFBs.
+// Note: sfbStrong and sfbWeak intentionally share sfbPct but carry independent user scores.
+// scissorsCenter uses (total - pinky) so the two scissor categories don't double-count total scissors.
+// weakRedirectPct may be -1 (unknown) — falls back to 30% of redirectPct as estimate.
 
 // Normalize each stat across all 41 layouts
 function norm(values: number[], v: number): number {

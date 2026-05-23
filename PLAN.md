@@ -62,30 +62,34 @@ src/
 
 ### Schema (see `src/types.ts` for authoritative interfaces)
 ```ts
-interface Layout {
-  id: string;                    // kebab-case e.g. "colemak-dh"
-  name: string;                  // display name
-  source: string;                // creator URL
-  cyanophageRef: string;         // cyanophage.github.io URL param
-  keys: string;                  // 30-char row-major: top→home→bottom, L→R
-  formFactors: ('ansi'|'ortho'|'columnar')[];
-  thumbKeys?: { left?: string[]; right?: string[] };
-  stats: {
-    sfbPct: number;
-    skipBigramPct: number;
-    lsbPct: number;
-    scissorsPct: number;
-    altPct: number;
-    rollInPct: number;
-    rollOutPct: number;
-    redirectPct: number;
-    weakRedirectPct: number;
-    offHomePinkyPct: number;    // estimated; see derivation in klp-data agent
-    thumbAltPct?: number;       // thumb-cluster layouts only
-  };
-  requiresThumbCluster: boolean;
+interface LayoutStats {
+  // From cyanophage table (authoritative — fetched from table.html)
+  sfbPct:            number;  // "sfb" column
+  skipBigramPct:     number;  // "sfb 2u" column
+  lsbPct:            number;  // "lat stretch" column
+  scissorsPct:       number;  // "scissors" column (total)
+  pinkyScissorsPct:  number;  // "pinky scissors" column — direct, no estimation
+  altPct:            number;  // "trigram alt" column
+  rollInPct:         number;  // "roll in" column
+  rollOutPct:        number;  // "roll out" column
+  redirectPct:       number;  // "tri redirect" column
+  weakRedirectPct:   number;  // from playground (not in table); -1 if unavailable
+  offHomePinkyPct:   number;  // "pinky off home" column — direct, no estimation
+  effort:            number;  // "effort" column (for display/sorting)
+  distance:          number;  // "distance" column (for display/sorting)
+  thumbAltPct?:      number;  // thumb-cluster layouts only
+
+  // Derived (our cross-check, stored alongside cyanophage values)
+  _derivedOffHomePinkyPct?:   number;  // computed from letter frequencies + keymap
+  _derivedPinkyScissorsPct?:  number;  // computed from fingerMap analysis
+  _dataSource:                'cyanophage' | 'derived' | 'mixed';
+  // 'mixed' = |cyanophage - derived| / cyanophage > 20% for any checked stat
+  _notes?:                    string;  // discrepancy or data quality notes
 }
 ```
+
+**Why both cyanophage + derived?**
+cyanophage uses a fixed English corpus — our derived calculation uses the same approach, giving us a sanity check. If they diverge >20%, the layout's keymap encoding may be wrong or the corpus differs. The scoring engine always uses cyanophage values; derived values are for validation only.
 
 ### 41 Layouts
 **Standard (30)**: QWERTY, Dvorak, Colemak, Colemak-DH, Graphite, Gallium, Canary, APT v3, Hands Down Neu, Sturdy, Engram, Carbyne, Really?, Whorf, Northstar, Semimak, MTGAP, CTGAP, Recurva, Halmak, Workman, Nerps, Focal, ISRT, IRST, Hyperroll, Pine v1, Pine v4, Beakl19bis, Night
@@ -168,13 +172,13 @@ layoutScore = (
   profile.rollOut   × norm(rollOutPct)
   profile.thumbAlt  × norm(thumbAltPct ?? 0)
   // Negative: user intolerance × inverted layout stat
-  (1-profile.sfbStrong)      × (1 - norm(sfbPct))      ← same stat as sfbWeak
-  (1-profile.sfbWeak)        × (1 - norm(sfbPct))      ← double-weights SFB avoidance
+  (1-profile.sfbStrong)      × (1 - norm(sfbPct))             ← same stat as sfbWeak
+  (1-profile.sfbWeak)        × (1 - norm(sfbPct))             ← double-weights SFB avoidance
   (1-profile.lsb)            × (1 - norm(lsbPct))
-  (1-profile.scissorsCenter) × (1 - norm(scissorsPct)) ← same stat as scissorsPinky
-  (1-profile.scissorsPinky)  × (1 - norm(scissorsPct))
+  (1-profile.scissorsCenter) × (1 - norm(scissorsPct - pinkyScissorsPct))  ← center only
+  (1-profile.scissorsPinky)  × (1 - norm(pinkyScissorsPct))  ← direct from cyanophage table
   (1-profile.redirect)       × (1 - norm(0.7×redirectPct + 0.3×weakRedirectPct))
-  (1-profile.pinky)          × (1 - norm(offHomePinkyPct))
+  (1-profile.pinky)          × (1 - norm(offHomePinkyPct))   ← direct from cyanophage table
   (1-profile.skipBigram)     × (1 - norm(skipBigramPct))
 ) / 12
 ```
