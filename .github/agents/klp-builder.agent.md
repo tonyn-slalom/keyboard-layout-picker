@@ -23,10 +23,15 @@ A React/TypeScript app that:
 
 ### Phase 0 — Scaffold
 Run: `npm create vite@latest . -- --template react-ts`
-Then install: `npm install tailwindcss @tailwindcss/vite recharts react-router-dom`
-Configure `vite.config.ts` to use `@tailwindcss/vite` plugin.
+Then install runtime deps: `npm install tailwindcss @tailwindcss/vite recharts react-router-dom`
+Then install dev deps: `npm install -D vitest @testing-library/react @testing-library/react-hooks jsdom`
+Configure `vite.config.ts`: add `@tailwindcss/vite` plugin and Vitest config block:
+```ts
+test: { environment: 'jsdom', globals: true }
+```
+Add `"test": "vitest"` to `package.json` scripts.
 Set up `tailwind.config.js` with `darkMode: 'class'`.
-Create folder skeleton: `src/data/`, `src/components/`, `src/utils/`, `src/hooks/`, `src/pages/`.
+Create folder skeleton: `src/data/`, `src/components/`, `src/utils/`, `src/hooks/`, `src/pages/`, `src/context/`, `src/__tests__/utils/`, `src/__tests__/controllers/`.
 
 ### Phase 0.5 — Canonical Types (REQUIRED before any other phase)
 Create `src/types.ts` using **exactly** the interfaces from `.github/instructions/klp-types.instructions.md`.
@@ -41,13 +46,25 @@ Creates `src/data/layouts.json` with all 41 layouts and full schema.
 Delegate to `klp-sequences` agent.
 Creates `src/utils/fingerMap.ts` and `src/utils/sequences.ts` (85 sequences, 10 categories).
 
-### Phase 3 — Scoring Utilities
+### Phase 3 — Scoring Utilities + Tests
 Delegate to `klp-scoring` agent (utilities part).
 Creates `src/utils/scoring.ts`, `src/utils/normalizer.ts`, `src/utils/qwertySimilarity.ts`.
+Also creates unit tests in `src/__tests__/utils/`: `scoring.test.ts`, `normalizer.test.ts`, `qwertySimilarity.test.ts`.
+Run `npm test` — all tests must pass before proceeding.
 
-### Phase 4 — Components & Pages
+### Phase 3.5 — Sequence Validation Tests
+Create `src/__tests__/utils/sequences.test.ts` verifying all 101 sequences:
+- Every sequence is exactly 6 chars
+- All chars exist in fingerMap
+- No duplicate `text` values
+- Correct count per category (8 each × 12 + 5 warmup)
+Run `npm test` — all tests must pass.
+
+### Phase 4 — Components & Pages + Controller Tests
 Delegate to `klp-components` agent.
-Creates all React components and page files.
+Creates all React components and page files (with controller files for complex components).
+Also creates `src/__tests__/controllers/`: `LayoutBrowser.controller.test.ts`, `TestStream.controller.test.ts`.
+Run `npm test` — all tests must pass before proceeding.
 
 ### Phase 5 — Scoring Engine & Results UI
 Delegate to `klp-scoring` agent (results part).

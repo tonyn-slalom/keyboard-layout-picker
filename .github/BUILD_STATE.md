@@ -6,11 +6,13 @@
 
 | Phase | Name | Status | Notes |
 |-------|------|--------|-------|
-| 0 | Scaffold | ⬜ pending | |
-| 1 | Layout Data | ⬜ pending | |
+| 0 | Scaffold (incl. Vitest setup) | ⬜ pending | |
+| 0.5 | Canonical Types (`src/types.ts`) | ⬜ pending | |
+| 1 | Layout Data (41 layouts) | ⬜ pending | |
 | 2 | Finger Map & Sequences | ⬜ pending | |
-| 3 | Scoring Utilities | ⬜ pending | |
-| 4 | Components & Pages | ⬜ pending | |
+| 3 | Scoring Utilities + Tests | ⬜ pending | |
+| 3.5 | Sequence Validation Tests | ⬜ pending | |
+| 4 | Components & Pages + Controller Tests | ⬜ pending | |
 | 5 | Scoring Engine & Results UI | ⬜ pending | |
 | 6 | Routing & Polish | ⬜ pending | |
 

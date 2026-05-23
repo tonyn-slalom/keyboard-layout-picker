@@ -5,17 +5,26 @@
 - **Tailwind CSS** for styling — no inline styles, no CSS modules
 - **Recharts** for radar/stat charts
 - **React Router v6** for routing
+- **Vitest + React Testing Library** for unit tests
 - **No external data fetching** — all layout data is local JSON
 
 ## Project Structure
 ```
 src/
+  context/TestResultsContext.tsx        ← useReducer global state for test results
   data/layouts.json
-  components/KeyboardViz/  LayoutBrowser/  TypingTest/  Results/
+  components/
+    KeyboardViz/                        ← Key, AnsiLayout, OrthoLayout, ColumnarLayout, KeyboardViz
+    LayoutBrowser/                      ← LayoutBrowser.controller.ts + LayoutBrowser.tsx + LayoutCard, LayoutDetail, LayoutComparison
+    TypingTest/                         ← TestStream.controller.ts + TestStream.tsx + WordDisplay
+    Results/                            ← RadarChart, RecommendationCard
   utils/fingerMap.ts  sequences.ts  scoring.ts  normalizer.ts  qwertySimilarity.ts
-  hooks/useTypingTest.ts  useTimer.ts
-  pages/HomePage.tsx  BrowsePage.tsx  TestPage.tsx  ResultsPage.tsx
+  hooks/useTimer.ts
+  pages/HomePage.tsx  BrowsePage.tsx  TestPage.tsx  ResultsPage.controller.ts  ResultsPage.tsx
+  types.ts
   App.tsx  main.tsx
+src/__tests__/utils/                    ← scoring, normalizer, qwertySimilarity, sequences tests
+src/__tests__/controllers/             ← controller hook tests (renderHook)
 ```
 
 ## Conventions
@@ -25,6 +34,20 @@ src/
 - Tailwind dark mode via `class` strategy — all UI supports dark mode
 - `fingerMap` keys use lowercase characters
 - Layout `keys` field = 30-char row-major string: top→home→bottom, L→R
+
+## Code Style — Functions over Inline
+- Extract any logic block > 3 lines into a named function
+- No inline logic in JSX `return` — extract to named variables/functions above `return`
+- Business logic handlers extracted to named functions, not anonymous inline arrows
+- Utility functions in `src/utils/`, stateful logic in `src/hooks/`
+- Pure functions for all scoring/normalization — no side effects
+
+## Architecture Pattern — Controller + View
+- Complex components (≥2 state pieces or non-trivial handlers) use the Controller pattern:
+  - `Component.controller.ts` — `useComponentController()` hook returns typed object with all state/handlers
+  - `Component.tsx` — pure JSX, calls `useComponentController()`, no business logic
+- Required for: `TestStream`, `LayoutBrowser`, `LayoutComparison`, `ResultsPage`, `LayoutDetail`
+- Global cross-page state (test results) via `Context + useReducer` in `src/context/`
 
 ## Key Domain Types
 ```ts

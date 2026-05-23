@@ -4,27 +4,161 @@ applyTo: "src/**/*.{ts,tsx}"
 ---
 # KLP React/TypeScript Conventions
 
-## Components
-- Functional components only; no class components
-- Named exports for all components except page-level (pages use default export)
-- Props typed with `interface`, not `type`
-- `React.memo` on list items (LayoutCard, RecommendationCard, Key)
+## Code Organization — Functions over Inline
+- **Extract functions early**: if a block of logic is more than 3–4 lines or used more than once, pull it into a named function
+- **No inline logic in JSX**: conditional rendering, data transforms, and calculations must be extracted to named variables or functions above the `return`
+- **No anonymous inline functions for business logic**: `onClick={() => doComplexThing()}` is fine; `onClick={() => { /* 10 lines */ }}` is not — extract a named handler
+- **Utility functions live in `src/utils/`**, not inside components
+- **Custom hooks for stateful logic**: any `useState` + `useEffect` combo beyond trivial cases → extract to `src/hooks/`
+
+```ts
+// ❌ Bad — inline logic in JSX
+<div>{layouts.filter(l => !l.requiresThumbCluster).sort((a,b) => a.stats.sfbPct - b.stats.sfbPct).map(l => <Card key={l.id} layout={l} />)}</div>
+
+// ✅ Good — extracted
+const standardLayouts = filterStandardLayouts(layouts);
+const sortedBySfb = sortByStat(standardLayouts, 'sfbPct');
+return <div>{sortedBySfb.map(l => <Card key={l.id} layout={l} />)}</div>;
+```
+
+## Architecture Patterns
+
+### Controller Pattern (primary pattern for complex components)
+Split components with non-trivial logic into two files:
+- `MyComponent.controller.ts` — all state, hooks, derived values, handlers; returns a typed object
+- `MyComponent.tsx` — pure presentation; receives controller output, no business logic
+
+```ts
+// LayoutBrowser.controller.ts
+export interface LayoutBrowserController {
+  filtered: Layout[];
+  query: string;
+  sortKey: SortKey;
+  handleQueryChange: (q: string) => void;
+  handleSortChange: (key: SortKey) => void;
+}
+
+export function useLayoutBrowserController(layouts: Layout[]): LayoutBrowserController {
+  const [query, setQuery] = useState('');
+  const [sortKey, setSortKey] = useState<SortKey>('sfbPct');
+
+  const filtered = useMemo(() => filterAndSort(layouts, query, sortKey), [layouts, query, sortKey]);
+
+  const handleQueryChange = useCallback((q: string) => setQuery(q), []);
+  const handleSortChange = useCallback((key: SortKey) => setSortKey(key), []);
+
+  return { filtered, query, sortKey, handleQueryChange, handleSortChange };
+}
+
+// LayoutBrowser.tsx
+export function LayoutBrowser({ layouts }: LayoutBrowserProps) {
+  const ctrl = useLayoutBrowserController(layouts);
+  return ( /* pure JSX using ctrl.* — no logic here */ );
+}
+```
+
+**When to use the Controller pattern:**
+- Component has ≥2 pieces of state
+- Component has event handlers with non-trivial logic
+- Component derives computed values from props/state
+
+**When to use a plain custom hook instead:**
+- Logic is reusable across multiple components (e.g. `useTimer`, `useMediaQuery`)
+- Logic is simple enough that a controller file would be overkill
+
+**When to use Context + Reducer:**
+- State must be shared across pages (e.g. test results flowing from TestPage → ResultsPage)
+- Use `src/context/TestResultsContext.tsx` with `useReducer`
+
+### File naming
+- `ComponentName.controller.ts` — controller hook (no JSX)
+- `ComponentName.tsx` — view (imports controller, returns JSX)
+- `useXxx.ts` in `src/hooks/` — reusable hooks not tied to a single component
+
+### Components where Controller pattern is required
+`TestStream`, `LayoutBrowser`, `LayoutComparison`, `ResultsPage`, `LayoutDetail`
+
+
 
 ## TypeScript
 - Strict mode; no `any`
 - Use `as const` for static lookup objects (fingerColors, columnarOffsets)
 - Discriminated unions for state machines (test status: `'idle'|'running'|'error'|'complete'`)
+- Pure functions for all scoring/normalization logic — no side effects
 
 ## Tailwind
 - Dark mode via `class` strategy (`dark:` variants required on all colored elements)
 - No inline `style={}` except for SVG geometry (x, y, width, height)
 - Finger colors: use `fill-*` classes, not hex values
+- Extract repeated class strings to a named `const` rather than duplicating
 
 ## SVG Keyboards
 - Always use `viewBox`, never fixed pixel width
 - Home row keys get `ring-2 ring-white/40` to distinguish them
 - Thumb keys rendered below bottom row
+- Key geometry calculations (x, y, width offsets) in a dedicated `getKeyPosition()` helper
 
 ## Routing
 - React Router v6 with `createBrowserRouter`
 - `/results` is a guarded route — redirect to `/test/run` if no results in state
+
+
+## Testing
+
+### Stack
+- **Vitest** (native Vite integration, zero config)
+- **@testing-library/react** for `renderHook` on controller hooks
+- **jsdom** environment
+
+### What to test (priority order)
+| Priority | Target | Tool |
+|----------|--------|------|
+| ✅ High | `scoring.ts`, `normalizer.ts`, `qwertySimilarity.ts` | Vitest — pure functions |
+| ✅ High | `sequences.ts` — all 101: length=6, valid chars, no duplicates | Vitest |
+| ✅ High | Controller hooks — state machine transitions, filter/sort correctness | `renderHook` |
+| 🟡 Medium | `TestResultsContext` reducer — action dispatch produces correct state | Vitest |
+| ❌ Skip | View components (markup) — brittle, low value | — |
+
+### Test file locations
+```
+src/__tests__/utils/scoring.test.ts
+src/__tests__/utils/normalizer.test.ts
+src/__tests__/utils/qwertySimilarity.test.ts
+src/__tests__/utils/sequences.test.ts
+src/__tests__/controllers/LayoutBrowser.controller.test.ts
+src/__tests__/controllers/TestStream.controller.test.ts
+```
+
+### Key patterns
+```ts
+// Pure function test
+import { describe, it, expect } from 'vitest';
+import { median } from '../../utils/normalizer';
+
+describe('median', () => {
+  it('returns middle value for odd-length array', () => {
+    expect(median([1, 3, 2])).toBe(2);
+  });
+  it('returns average of two middles for even-length array', () => {
+    expect(median([1, 2, 3, 4])).toBe(2.5);
+  });
+  it('defaults to 0.5 for empty array', () => {
+    expect(median([])).toBe(0.5);
+  });
+});
+
+// Controller hook test
+import { renderHook, act } from '@testing-library/react';
+import { useLayoutBrowserController } from '../../components/LayoutBrowser/LayoutBrowser.controller';
+
+it('filters layouts by query', () => {
+  const { result } = renderHook(() => useLayoutBrowserController(mockLayouts));
+  act(() => result.current.handleQueryChange('colemak'));
+  expect(result.current.filtered.every(l => l.name.toLowerCase().includes('colemak'))).toBe(true);
+});
+```
+
+### Coverage target
+- Utils: 100% function coverage
+- Controllers: all state transitions covered
+- Run with: `npm run test` (add `"test": "vitest"` to package.json scripts)
