@@ -5,6 +5,7 @@
 - **Tailwind CSS** for styling — no inline styles, no CSS modules
 - **Recharts** for radar/stat charts
 - **React Router v6** for routing
+- **Vitest + React Testing Library** for unit tests
 - **No external data fetching** — all layout data is local JSON
 
 ## Project Structure
@@ -22,6 +23,8 @@ src/
   pages/HomePage.tsx  BrowsePage.tsx  TestPage.tsx  ResultsPage.controller.ts  ResultsPage.tsx
   types.ts
   App.tsx  main.tsx
+src/__tests__/utils/                    ← scoring, normalizer, qwertySimilarity, sequences tests
+src/__tests__/controllers/             ← controller hook tests (renderHook)
 ```
 
 ## Conventions

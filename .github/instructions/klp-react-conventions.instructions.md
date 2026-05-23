@@ -102,3 +102,63 @@ export function LayoutBrowser({ layouts }: LayoutBrowserProps) {
 - React Router v6 with `createBrowserRouter`
 - `/results` is a guarded route — redirect to `/test/run` if no results in state
 
+
+## Testing
+
+### Stack
+- **Vitest** (native Vite integration, zero config)
+- **@testing-library/react** for `renderHook` on controller hooks
+- **jsdom** environment
+
+### What to test (priority order)
+| Priority | Target | Tool |
+|----------|--------|------|
+| ✅ High | `scoring.ts`, `normalizer.ts`, `qwertySimilarity.ts` | Vitest — pure functions |
+| ✅ High | `sequences.ts` — all 101: length=6, valid chars, no duplicates | Vitest |
+| ✅ High | Controller hooks — state machine transitions, filter/sort correctness | `renderHook` |
+| 🟡 Medium | `TestResultsContext` reducer — action dispatch produces correct state | Vitest |
+| ❌ Skip | View components (markup) — brittle, low value | — |
+
+### Test file locations
+```
+src/__tests__/utils/scoring.test.ts
+src/__tests__/utils/normalizer.test.ts
+src/__tests__/utils/qwertySimilarity.test.ts
+src/__tests__/utils/sequences.test.ts
+src/__tests__/controllers/LayoutBrowser.controller.test.ts
+src/__tests__/controllers/TestStream.controller.test.ts
+```
+
+### Key patterns
+```ts
+// Pure function test
+import { describe, it, expect } from 'vitest';
+import { median } from '../../utils/normalizer';
+
+describe('median', () => {
+  it('returns middle value for odd-length array', () => {
+    expect(median([1, 3, 2])).toBe(2);
+  });
+  it('returns average of two middles for even-length array', () => {
+    expect(median([1, 2, 3, 4])).toBe(2.5);
+  });
+  it('defaults to 0.5 for empty array', () => {
+    expect(median([])).toBe(0.5);
+  });
+});
+
+// Controller hook test
+import { renderHook, act } from '@testing-library/react';
+import { useLayoutBrowserController } from '../../components/LayoutBrowser/LayoutBrowser.controller';
+
+it('filters layouts by query', () => {
+  const { result } = renderHook(() => useLayoutBrowserController(mockLayouts));
+  act(() => result.current.handleQueryChange('colemak'));
+  expect(result.current.filtered.every(l => l.name.toLowerCase().includes('colemak'))).toBe(true);
+});
+```
+
+### Coverage target
+- Utils: 100% function coverage
+- Controllers: all state transitions covered
+- Run with: `npm run test` (add `"test": "vitest"` to package.json scripts)
