@@ -7,6 +7,7 @@
  *   sc=scissorsCenter  sp=scissorsPinky
  *   rd=redirect  pk=pinky  sb=skipBigram
  *   qb=qwertyBoost (0|1)
+ *   xa=exclude alpha-thumb layouts (0|1)
  */
 import type { CategoryId, ComfortProfile } from '../types';
 
@@ -32,18 +33,21 @@ const PARAM_TO_CATEGORY = Object.fromEntries(
 export function encodeProfile(
   profile: ComfortProfile,
   qwertyBoost: boolean,
+  excludeAlphaThumbLayouts: boolean,
 ): URLSearchParams {
   const params = new URLSearchParams();
   for (const [cat, key] of Object.entries(PARAM_KEY)) {
     params.set(key, (profile[cat as CategoryId] ?? 0).toFixed(2));
   }
   params.set('qb', qwertyBoost ? '1' : '0');
+  params.set('xa', excludeAlphaThumbLayouts ? '1' : '0');
   return params;
 }
 
 export interface DecodedUrl {
   profile: ComfortProfile;
   qwertyBoost: boolean;
+  excludeAlphaThumbLayouts: boolean;
 }
 
 export function decodeProfile(params: URLSearchParams): DecodedUrl | null {
@@ -61,5 +65,6 @@ export function decodeProfile(params: URLSearchParams): DecodedUrl | null {
   return {
     profile: profile as ComfortProfile,
     qwertyBoost: params.get('qb') === '1',
+    excludeAlphaThumbLayouts: params.get('xa') === '1',
   };
 }

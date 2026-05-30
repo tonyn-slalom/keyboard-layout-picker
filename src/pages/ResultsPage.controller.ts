@@ -15,10 +15,12 @@ export interface ResultsPageController {
   isManualMode: boolean;
   topLayouts: RankedLayoutDetailed[];
   qwertyBoost: boolean;
+  excludeAlphaThumbLayouts: boolean;
   // Debug
   debugLayoutId: string | null;
   // Handlers
   handleToggleQwertyBoost: () => void;
+  handleToggleExcludeAlphaThumbLayouts: () => void;
   handleCategoryChange: (cat: CategoryId, value: number) => void;
   handleResetProfile: () => void;
   handleToggleManualMode: () => void;
@@ -42,6 +44,9 @@ export function useResultsPageController(
   urlSeed?: DecodedUrl | null,
 ): ResultsPageController {
   const [qwertyBoost, setQwertyBoost] = useState(urlSeed?.qwertyBoost ?? false);
+  const [excludeAlphaThumbLayouts, setExcludeAlphaThumbLayouts] = useState(
+    urlSeed?.excludeAlphaThumbLayouts ?? false,
+  );
   const [isManualMode, setIsManualMode] = useState(urlSeed != null);
   const [manualProfile, setManualProfile] = useState<ComfortProfile>(
     urlSeed?.profile ?? defaultComfortProfile,
@@ -60,12 +65,23 @@ export function useResultsPageController(
 
   const activeProfile = isManualMode ? manualProfile : testProfile;
 
+  const candidateLayouts = useMemo(
+    () => (excludeAlphaThumbLayouts
+      ? allLayouts.filter(layout => !layout.requiresThumbCluster)
+      : allLayouts),
+    [allLayouts, excludeAlphaThumbLayouts],
+  );
+
   const topLayouts = useMemo(
-    () => rankLayoutsDetailed(allLayouts, activeProfile, qwertyBoost).slice(0, 5),
-    [allLayouts, activeProfile, qwertyBoost],
+    () => rankLayoutsDetailed(candidateLayouts, activeProfile, qwertyBoost).slice(0, 5),
+    [candidateLayouts, activeProfile, qwertyBoost],
   );
 
   const handleToggleQwertyBoost = useCallback(() => setQwertyBoost(p => !p), []);
+  const handleToggleExcludeAlphaThumbLayouts = useCallback(
+    () => setExcludeAlphaThumbLayouts(prev => !prev),
+    [],
+  );
 
   const handleToggleManualMode = useCallback(() => {
     setIsManualMode(prev => {
@@ -94,8 +110,10 @@ export function useResultsPageController(
     isManualMode,
     topLayouts,
     qwertyBoost,
+    excludeAlphaThumbLayouts,
     debugLayoutId,
     handleToggleQwertyBoost,
+    handleToggleExcludeAlphaThumbLayouts,
     handleCategoryChange,
     handleResetProfile,
     handleToggleManualMode,

@@ -3,9 +3,15 @@ import { Link } from 'react-router-dom';
 import type { Layout } from '../../types';
 import { KeyboardViz } from '../KeyboardViz/KeyboardViz';
 
+interface LayoutHighlight {
+  label: string;
+  value: string;
+}
+
 interface LayoutCardProps {
   layout: Layout;
   matchPct?: number;
+  highlights?: LayoutHighlight[];
 }
 
 function badgeClass(pct: number): string {
@@ -14,7 +20,9 @@ function badgeClass(pct: number): string {
   return 'bg-red-500/20 text-red-400';
 }
 
-function LayoutCardInner({ layout, matchPct }: LayoutCardProps) {
+function LayoutCardInner({ layout, matchPct, highlights }: LayoutCardProps) {
+  const displayHighlights = highlights ?? [];
+
   return (
     <Link
       to={`/browse/${layout.id}`}
@@ -37,7 +45,7 @@ function LayoutCardInner({ layout, matchPct }: LayoutCardProps) {
               title="Optimized for keyboards with thumb cluster keys"
               aria-label="Requires thumb cluster"
             >
-              🦾
+              👍
             </span>
           )}
         </div>
@@ -48,24 +56,14 @@ function LayoutCardInner({ layout, matchPct }: LayoutCardProps) {
       </div>
 
       <div className="grid grid-cols-3 gap-2 text-xs text-gray-600 dark:text-gray-400">
-        <div className="text-center">
-          <div className="font-medium text-gray-900 dark:text-gray-200">
-            {layout.stats.sfbPct.toFixed(2)}%
+        {displayHighlights.map(highlight => (
+          <div key={highlight.label} className="text-center">
+            <div className="font-medium text-gray-900 dark:text-gray-200">
+              {highlight.value}
+            </div>
+            <div>{highlight.label}</div>
           </div>
-          <div>SFB</div>
-        </div>
-        <div className="text-center">
-          <div className="font-medium text-gray-900 dark:text-gray-200">
-            {layout.stats.altPct.toFixed(1)}%
-          </div>
-          <div>Alt</div>
-        </div>
-        <div className="text-center">
-          <div className="font-medium text-gray-900 dark:text-gray-200">
-            {(layout.stats.rollInPct + layout.stats.rollOutPct).toFixed(1)}%
-          </div>
-          <div>Rolls</div>
-        </div>
+        ))}
       </div>
     </Link>
   );

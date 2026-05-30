@@ -25,6 +25,13 @@ export default function HomePage() {
         >
           Browse Layouts
         </Link>
+        <Link
+          to="/about"
+          aria-label="Read about Keyboard Layout Picker"
+          className="px-8 py-3 rounded-xl border border-cyan-300 dark:border-cyan-700 text-cyan-700 dark:text-cyan-300 text-lg font-semibold hover:bg-cyan-50 dark:hover:bg-cyan-950/40 transition-colors"
+        >
+          Learn About KLP
+        </Link>
       </div>
     </main>
   );

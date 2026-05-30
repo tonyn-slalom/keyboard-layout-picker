@@ -1,6 +1,48 @@
-import type { Layout } from '../../types';
+import { useMemo } from 'react';
+import type { CategoryId, Layout } from '../../types';
 import { useLayoutBrowserController, type SortKey } from './LayoutBrowser.controller';
 import { LayoutCard } from './LayoutCard';
+import { defaultComfortProfile, rankLayoutsDetailed } from '../../utils/scoring';
+
+interface LayoutHighlight {
+  label: string;
+  value: string;
+}
+
+const CATEGORY_LABELS: Record<CategoryId, string> = {
+  alt: 'Alt',
+  rollIn: 'Roll-in',
+  rollOut: 'Roll-out',
+  thumbAlt: 'Thumb Alt',
+  sfbStrong: 'SFB Strong',
+  sfbWeak: 'SFB Weak',
+  lsb: 'LSB',
+  scissorsCenter: 'Scissors C',
+  scissorsPinky: 'Scissors P',
+  redirect: 'Redirect',
+  pinky: 'Pinky',
+  skipBigram: 'Skip Bigram',
+};
+
+const CATEGORY_DECIMALS: Record<CategoryId, number> = {
+  alt: 1,
+  rollIn: 1,
+  rollOut: 1,
+  thumbAlt: 1,
+  sfbStrong: 2,
+  sfbWeak: 2,
+  lsb: 2,
+  scissorsCenter: 2,
+  scissorsPinky: 2,
+  redirect: 1,
+  pinky: 1,
+  skipBigram: 2,
+};
+
+function formatCategoryValue(category: CategoryId, rawStat: number): string {
+  const decimals = CATEGORY_DECIMALS[category];
+  return `${rawStat.toFixed(decimals)}%`;
+}
 
 const SORT_OPTIONS: Array<{ key: SortKey; label: string }> = [
   { key: 'sfbPct',      label: 'SFB%' },
@@ -19,6 +61,21 @@ interface LayoutBrowserProps {
 
 export function LayoutBrowser({ layouts, matchPcts }: LayoutBrowserProps) {
   const ctrl = useLayoutBrowserController(layouts, matchPcts);
+  const layoutHighlightsById = useMemo(
+    () => new Map<string, LayoutHighlight[]>(
+      rankLayoutsDetailed(layouts, defaultComfortProfile(), false).map(ranked => [
+        ranked.layout.id,
+        ranked.breakdown
+          .filter(item => item.rawStat > 0)
+          .slice(0, 3)
+          .map(item => ({
+            label: CATEGORY_LABELS[item.category],
+            value: formatCategoryValue(item.category, item.rawStat),
+          })),
+      ]),
+    ),
+    [layouts],
+  );
 
   return (
     <div className="w-full">
@@ -64,6 +121,7 @@ export function LayoutBrowser({ layouts, matchPcts }: LayoutBrowserProps) {
               key={layout.id}
               layout={layout}
               matchPct={matchPcts?.[layout.id]}
+              highlights={layoutHighlightsById.get(layout.id)}
             />
           ))}
         </div>

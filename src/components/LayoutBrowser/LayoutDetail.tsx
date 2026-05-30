@@ -42,7 +42,7 @@ export function LayoutDetail({ layout }: LayoutDetailProps) {
             title="Optimized for keyboards with thumb cluster keys"
             aria-label="Requires thumb cluster"
           >
-            🦾
+            👍
           </span>
         )}
       </div>

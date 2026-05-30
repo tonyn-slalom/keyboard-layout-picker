@@ -383,8 +383,11 @@ function ResultsPageInner({ urlSeed }: ResultsPageInnerProps) {
 
   // Keep URL in sync with current active profile
   useEffect(() => {
-    setSearchParams(encodeProfile(ctrl.activeProfile, ctrl.qwertyBoost), { replace: true });
-  }, [ctrl.activeProfile, ctrl.qwertyBoost, setSearchParams]);
+    setSearchParams(
+      encodeProfile(ctrl.activeProfile, ctrl.qwertyBoost, ctrl.excludeAlphaThumbLayouts),
+      { replace: true },
+    );
+  }, [ctrl.activeProfile, ctrl.qwertyBoost, ctrl.excludeAlphaThumbLayouts, setSearchParams]);
 
   return (
     <main className="min-h-screen bg-gray-50 dark:bg-gray-950 px-4 py-8">
@@ -452,6 +455,21 @@ function ResultsPageInner({ urlSeed }: ResultsPageInnerProps) {
                 <span className="font-medium">Manual profile override</span>
                 <br />
                 Edit sliders below to see how different preferences change results.
+              </span>
+            </label>
+
+            <label className="flex items-start gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={ctrl.excludeAlphaThumbLayouts}
+                onChange={ctrl.handleToggleExcludeAlphaThumbLayouts}
+                aria-label="Exclude alpha-thumb layouts from ranking"
+                className="mt-1 w-4 h-4 accent-cyan-600"
+              />
+              <span className="text-sm text-gray-700 dark:text-gray-300">
+                <span className="font-medium">Exclude alpha-thumb layouts</span>
+                <br />
+                Hides layouts that require thumb-cluster alpha keys from recommendations.
               </span>
             </label>
           </div>

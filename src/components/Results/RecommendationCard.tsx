@@ -31,11 +31,11 @@ export function RecommendationCard({ ranked, rank }: RecommendationCardProps) {
             </h3>
             {layout.requiresThumbCluster && (
               <span
-                className="text-sm"
+                className="text-lg"
                 title="Optimized for keyboards with thumb cluster keys"
                 aria-label="Requires thumb cluster"
               >
-                🦾 Thumb cluster
+                👍
               </span>
             )}
           </div>

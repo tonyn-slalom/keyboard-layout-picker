@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useLayoutEffect, useMemo, useRef } from 'react';
-import type { SequenceResult } from '../../types';
+import type { Sequence, SequenceResult } from '../../types';
 import { sequences } from '../../utils/sequences';
 import { useTestStreamController } from './TestStream.controller';
 import { useTestResults } from '../../context/TestResultsContext';
@@ -17,7 +17,7 @@ const CHAR_CLASSES: Record<CharState, string> = {
   untyped: 'text-zinc-500',
 };
 
-function buildFlatStream(seqs: typeof sequences): { flat: string; seqStarts: number[] } {
+function buildFlatStream(seqs: Sequence[]): { flat: string; seqStarts: number[] } {
   const seqStarts: number[] = [];
   const parts: string[] = [];
   let pos = 0;
@@ -33,6 +33,32 @@ function buildFlatStream(seqs: typeof sequences): { flat: string; seqStarts: num
   return { flat: parts.join(''), seqStarts };
 }
 
+function splitWarmupAndScored(allSequences: Sequence[]): {
+  warmupSequences: Sequence[];
+  scoredSequences: Sequence[];
+} {
+  const warmupSequences = allSequences.filter(sequence => sequence.isWarmup);
+  const scoredSequences = allSequences.filter(sequence => !sequence.isWarmup);
+  return { warmupSequences, scoredSequences };
+}
+
+function shuffleSequences(input: Sequence[]): Sequence[] {
+  const shuffled = [...input];
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    const current = shuffled[index];
+    shuffled[index] = shuffled[randomIndex]!;
+    shuffled[randomIndex] = current!;
+  }
+  return shuffled;
+}
+
+function buildRunSequences(allSequences: Sequence[]): Sequence[] {
+  const { warmupSequences, scoredSequences } = splitWarmupAndScored(allSequences);
+  const shuffledScoredSequences = shuffleSequences(scoredSequences);
+  return [...warmupSequences, ...shuffledScoredSequences];
+}
+
 export function TestStream() {
   const navigate = useNavigate();
   const { dispatch } = useTestResults();
@@ -42,9 +68,11 @@ export function TestStream() {
     navigate('/results');
   }
 
-  const ctrl = useTestStreamController(sequences, handleComplete);
+  const runSequences = useMemo(() => buildRunSequences(sequences), []);
 
-  const { flat, seqStarts } = useMemo(() => buildFlatStream(sequences), []);
+  const ctrl = useTestStreamController(runSequences, handleComplete);
+
+  const { flat, seqStarts } = useMemo(() => buildFlatStream(runSequences), [runSequences]);
   // When awaitingSpace, currentCharIndex === seq.text.length, which lands exactly on the space in the flat stream
   const globalCharIdx = (seqStarts[ctrl.currentIndex] ?? 0) + ctrl.currentCharIndex;
 
@@ -123,7 +151,7 @@ export function TestStream() {
 
       <div className="mt-8 h-5">
         {ctrl.status === 'idle' && (
-          <p className="text-zinc-500 text-sm animate-pulse">Start typing to begin\u2026</p>
+          <p className="text-zinc-500 text-sm animate-pulse">Start typing to begin...</p>
         )}
         {ctrl.status === 'error' && (
           <p className="text-red-400 text-sm">Press any key to retry this sequence</p>

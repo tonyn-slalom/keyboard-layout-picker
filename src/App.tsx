@@ -6,6 +6,7 @@ import BrowsePage from './pages/BrowsePage';
 import TestPage from './pages/TestPage';
 import ResultsPage from './pages/ResultsPage';
 import LayoutDetailPage from './pages/LayoutDetailPage';
+import AboutPage from './pages/AboutPage';
 
 function NavBar({ darkMode, onToggleDark }: { darkMode: boolean; onToggleDark: () => void }) {
   return (
@@ -18,6 +19,19 @@ function NavBar({ darkMode, onToggleDark }: { darkMode: boolean; onToggleDark: (
         KLP
       </Link>
       <div className="flex items-center gap-4">
+        <NavLink
+          to="/test"
+          aria-label="Take the typing test"
+          className={({ isActive }) =>
+            `text-sm font-medium transition-colors ${
+              isActive
+                ? 'text-blue-600 dark:text-blue-400'
+                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+            }`
+          }
+        >
+          Test
+        </NavLink>
         <NavLink
           to="/browse"
           aria-label="Browse layouts"
@@ -32,8 +46,8 @@ function NavBar({ darkMode, onToggleDark }: { darkMode: boolean; onToggleDark: (
           Browse
         </NavLink>
         <NavLink
-          to="/test"
-          aria-label="Take the typing test"
+          to="/about"
+          aria-label="Learn more about Keyboard Layout Picker"
           className={({ isActive }) =>
             `text-sm font-medium transition-colors ${
               isActive
@@ -42,7 +56,7 @@ function NavBar({ darkMode, onToggleDark }: { darkMode: boolean; onToggleDark: (
             }`
           }
         >
-          Test
+          About
         </NavLink>
         <button
           onClick={onToggleDark}
@@ -82,6 +96,7 @@ export default function App() {
                       <Route path="/" element={<HomePage />} />
                       <Route path="/browse" element={<BrowsePage />} />
                       <Route path="/browse/:id" element={<LayoutDetailPage />} />
+                      <Route path="/about" element={<AboutPage />} />
                       <Route path="/results" element={<ResultsPage />} />
                     </Routes>
                   </>

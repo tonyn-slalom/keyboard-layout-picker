@@ -96,25 +96,33 @@ export function useTestStreamController(
       if (e.ctrlKey || e.altKey || e.metaKey) return;
 
       const typedChar = e.key;
+      let nextExpectedIndex = currentCharIndex;
+      let waitingForSpace = awaitingSpace;
 
-      if (status === 'idle' || status === 'error') {
+      if (status === 'idle') {
         setStatus('running');
         timer.start();
-        if (status === 'error') {
-          setCurrentCharIndex(0);
-          keypressTimesRef.current = [];
-          errorCountRef.current += 1;
-          setErrorCount(prev => prev + 1);
-        }
-        return;
+        // Do not return here: the first key should also be evaluated as input.
       }
 
-      if (status !== 'running') return;
+      if (status === 'error') {
+        setStatus('running');
+        timer.start();
+        setCurrentCharIndex(0);
+        setAwaitingSpace(false);
+        keypressTimesRef.current = [];
+        errorCountRef.current += 1;
+        setErrorCount(prev => prev + 1);
+        nextExpectedIndex = 0;
+        waitingForSpace = false;
+      }
+
+      if (status !== 'running' && status !== 'idle' && status !== 'error') return;
 
       if (timer.elapsedMs === 0) timer.start();
 
       // Waiting for the inter-word space
-      if (awaitingSpace) {
+      if (waitingForSpace) {
         if (typedChar === ' ') {
           advanceSequence(pendingElapsedRef.current, errorCountRef.current);
         }
@@ -122,10 +130,10 @@ export function useTestStreamController(
         return;
       }
 
-      const expectedChar = currentSequence.text[currentCharIndex];
+      const expectedChar = currentSequence.text[nextExpectedIndex];
       if (typedChar === expectedChar) {
         keypressTimesRef.current.push(performance.now());
-        const nextCharIndex = currentCharIndex + 1;
+        const nextCharIndex = nextExpectedIndex + 1;
         if (nextCharIndex >= currentSequence.text.length) {
           const elapsed = timer.stop();
           // If this is the last sequence, finish immediately

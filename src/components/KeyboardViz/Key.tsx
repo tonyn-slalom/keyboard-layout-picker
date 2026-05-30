@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 const FINGER_NAMES = [
   'LP', 'LR', 'LM', 'LI', 'LII',
   'RII', 'RI', 'RM', 'RR', 'RP',
@@ -44,14 +42,11 @@ function heatFill(t: number): string {
 }
 
 export function Key({ char, finger, x, y, width = 40, height = 40, isHome = false, heat, isActive = false }: KeyProps) {
-  const [hovered, setHovered] = useState(false);
   const fingerName = FINGER_NAMES[finger] ?? 'Unknown';
   const fillColor = isActive ? 'hsl(217, 91%, 60%)' : heatFill(heat);
 
   return (
     <g
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
       role="img"
       aria-label={`${char} — ${fingerName}`}
     >
@@ -83,27 +78,6 @@ export function Key({ char, finger, x, y, width = 40, height = 40, isHome = fals
       >
         {char === ' ' ? '⎵' : char}
       </text>
-      {hovered && (
-        <g>
-          <rect
-            x={x}
-            y={y - 28}
-            width={64}
-            height={22}
-            rx={3}
-            className="fill-gray-800 dark:fill-gray-700"
-          />
-          <text
-            x={x + 32}
-            y={y - 12}
-            textAnchor="middle"
-            fontSize={11}
-            className="fill-white select-none pointer-events-none"
-          >
-            {char === ' ' ? 'SPC' : char} — {fingerName}
-          </text>
-        </g>
-      )}
     </g>
   );
 }
