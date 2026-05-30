@@ -1,0 +1,120 @@
+// ─── Fingers & Keys ─────────────────────────────────────────────────────────
+
+export type Hand = 'L' | 'R' | 'LT' | 'RT';
+export type Row  = 'top' | 'home' | 'bottom' | 'thumb';
+
+// finger index: 0=LP, 1=LR, 2=LM, 3=LI, 4=LII(inner),
+//               5=RII, 6=RI, 7=RM, 8=RR, 9=RP, 10=LThumb, 11=RThumb
+export interface FingerEntry {
+  finger: number;
+  hand:   Hand;
+  row:    Row;
+}
+
+// ─── Layouts ─────────────────────────────────────────────────────────────────
+
+export interface LayoutStats {
+  // ── From cyanophage table (authoritative) ───────────────────────────────
+  // Source: https://cyanophage.github.io/table.html
+  sfbPct:             number;   // same-finger bigrams %
+  skipBigramPct:      number;   // "sfb 2u" column — 2u skip bigrams %
+  skipBigram2Pct:     number;   // "skip bigrams2" column — secondary skip bigram metric
+  lsbPct:             number;   // lateral stretch bigrams %
+  scissorsPct:        number;   // total scissors %
+  pinkyScissorsPct:   number;   // "pinky scissors" — maps to scissorsPinky test category
+  wideScissorsPct:    number;   // "wide scissors" column
+  altPct:             number;   // trigram hand alternation %
+  rollInPct:          number;   // inward rolls %
+  rollOutPct:         number;   // outward rolls %
+  redirectPct:        number;   // trigram redirects %
+  weakRedirectPct:    number;   // weak redirects %
+  offHomePinkyPct:    number;   // "pinky off home" — direct from table, no estimation needed
+  effort:             number;   // total effort score (useful for display/sorting)
+  distance:           number;   // finger travel distance
+  pinkyDist:          number;   // "pinky dist" — pinky-specific distance
+  col56Pct:           number;   // "col5&6" — inner index column usage %
+  thumbAltPct?:       number;   // thumb-cluster layouts only (not in cyanophage table)
+
+  // ── Derived (our own calculation as cross-check) ─────────────────────────
+  _derivedOffHomePinkyPct?:   number;  // our estimate from letter frequencies + keymap
+  _derivedPinkyScissorsPct?:  number;  // our estimate from fingerMap analysis
+  _dataSource:                'cyanophage' | 'derived' | 'mixed';
+  // Set to 'mixed' if |derived - cyanophage| / cyanophage > 0.2 for any stat
+  _notes?:                    string;  // discrepancies, -1 placeholders, manual overrides
+}
+
+export interface Layout {
+  id:                   string;             // kebab-case  e.g. "colemak-dh"
+  name:                 string;             // Display     e.g. "Colemak-DH"
+  source:               string;             // Creator URL
+  cyanophageRef:        string;             // URL param for cyanophage playground
+  keys:                 string;             // 30-char row-major (top→home→bottom, L→R)
+  formFactors:          FormFactor[];
+  thumbKeys?:           { left?: string[]; right?: string[] };
+  outerKeys?:           { topRight?: string; homeLeft?: string; homeRight?: string; bottomLeft?: string };
+  stats:                LayoutStats;
+  requiresThumbCluster: boolean;
+}
+
+export type FormFactor = 'ansi' | 'ortho' | 'columnar';
+
+// ─── Typing Test ─────────────────────────────────────────────────────────────
+
+// 12 categories (sfb and scissors split by finger strength)
+// Positive (higher = user prefers): alt, rollIn, rollOut, thumbAlt
+// Negative (higher = user dislikes): sfbStrong, sfbWeak, lsb, scissorsCenter, scissorsPinky, redirect, pinky, skipBigram
+export type CategoryId =
+  | 'alt'
+  | 'rollIn'
+  | 'rollOut'
+  | 'thumbAlt'
+  | 'sfbStrong'       // index + middle finger SFBs
+  | 'sfbWeak'         // ring + pinky finger SFBs
+  | 'lsb'
+  | 'scissorsCenter'  // scissors not involving pinky
+  | 'scissorsPinky'   // scissors where pinky is the top or bottom key
+  | 'redirect'
+  | 'pinky'
+  | 'skipBigram';
+
+export interface Sequence {
+  id:         string;       // e.g. "alt-01"
+  category:   CategoryId;
+  text:       string;       // exactly 6 chars (thumbAlt includes one space)
+  isWarmup:   boolean;
+  thumbMode:  boolean;      // true only for thumbAlt (space is a required char, not separator)
+}
+
+export interface SequenceResult {
+  sequenceId:    string;
+  category:      CategoryId;
+  wpm:           number;       // words-per-minute for this 6-char sequence
+  errorCount:    number;       // total restarts on this sequence
+  durationMs:    number;       // wall-clock time from first keypress to last correct char
+  keyIntervals:  number[];     // ms between each consecutive correct keypress (5 values for 6-char seqs)
+  keyTimestamps: number[];     // ms from first keypress for each correct keypress (absolute window log)
+}
+
+// ─── Test State Machine ──────────────────────────────────────────────────────
+
+export type TestStatus = 'idle' | 'running' | 'error' | 'complete';
+
+export interface TestState {
+  sequences:        Sequence[];
+  currentIndex:     number;
+  currentCharIndex: number;
+  status:           TestStatus;
+  results:          SequenceResult[];
+}
+
+// ─── Scoring ─────────────────────────────────────────────────────────────────
+
+// Map of CategoryId → composite score in [0, 1]
+export type ComfortProfile = Record<CategoryId, number>;
+
+export interface RankedLayout {
+  layout:       Layout;
+  score:        number;           // final score in [0, 1]
+  matchPct:     number;           // score * 100, rounded to 1 decimal
+  topReasons:   string[];         // top 3 differentiating stat descriptions
+}

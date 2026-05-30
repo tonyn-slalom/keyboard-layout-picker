@@ -6,15 +6,15 @@
 
 | Phase | Name | Status | Notes |
 |-------|------|--------|-------|
-| 0 | Scaffold (incl. Vitest setup) | ⬜ pending | |
-| 0.5 | Canonical Types (`src/types.ts`) | ⬜ pending | |
-| 1 | Layout Data (41 layouts) | ⬜ pending | |
-| 2 | Finger Map & Sequences | ⬜ pending | |
-| 3 | Scoring Utilities + Tests | ⬜ pending | |
-| 3.5 | Sequence Validation Tests | ⬜ pending | |
-| 4 | Components & Pages + Controller Tests | ⬜ pending | |
-| 5 | Scoring Engine & Results UI | ⬜ pending | |
-| 6 | Routing & Polish | ⬜ pending | |
+| 0 | Scaffold (incl. Vitest setup) | ✅ done | 2026-05-29 |
+| 0.5 | Canonical Types (`src/types.ts`) | ✅ done | 2026-05-29 |
+| 1 | Layout Data (41 layouts) | ✅ done | 2026-05-29 — real stats from cyanophage.github.io/table.html, keys from SVG extraction |
+| 2 | Finger Map & Sequences | ✅ done | 2026-05-29, 101 seqs validated |
+| 3 | Scoring Utilities + Tests | ✅ done | 2026-05-29, 26 tests pass |
+| 3.5 | Sequence Validation Tests | ✅ done | 2026-05-29, 11 tests pass |
+| 4 | Components & Pages + Controller Tests | ✅ done | 2026-05-29 |
+| 5 | Scoring Engine & Results UI | ✅ done | 2026-05-29, included in Phase 4 |
+| 6 | Routing & Polish | ✅ done | 2026-05-29, build passes |
 
 ## Symbols
 - ⬜ pending — not started
@@ -31,9 +31,9 @@
 
 ## Last Known Good Commit / State
 > Update after each successful phase:
-- Phase last completed: —
-- `tsc --noEmit` status: —
-- `npm run build` status: —
+- Phase last completed: 6 (all phases done)
+- `tsc --noEmit` status: ✅ clean
+- `npm run build` status: ✅ passes (568 kB bundle, no errors)
 
 ## Known Issues / Blockers
 > Document any blockers for the next session to pick up:

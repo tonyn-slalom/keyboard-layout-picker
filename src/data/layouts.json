@@ -1,0 +1,1597 @@
+[
+  {
+    "id": "qwerty",
+    "name": "QWERTY",
+    "source": "https://en.wikipedia.org/wiki/QWERTY",
+    "cyanophageRef": "qwerty",
+    "keys": "qwertyuiopasdfghjkl;zxcvbnm,./",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 4.39,
+      "skipBigramPct": 0.97,
+      "skipBigram2Pct": 5.45,
+      "lsbPct": 4.55,
+      "scissorsPct": 1.46,
+      "pinkyScissorsPct": 0.56,
+      "wideScissorsPct": 6.66,
+      "altPct": 21.38,
+      "rollInPct": 21.7,
+      "rollOutPct": 19.06,
+      "redirectPct": 11.92,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 2.47,
+      "effort": 1258.15,
+      "distance": 354.82,
+      "pinkyDist": 12.1,
+      "col56Pct": 25.71,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": "-",
+      "homeRight": "'",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "dvorak",
+    "name": "Dvorak",
+    "source": "https://en.wikipedia.org/wiki/Dvorak_keyboard_layout",
+    "cyanophageRef": "dvorak",
+    "keys": "',.pyfgcrlaoeuidhtns;qjkxbmwvz",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 1.87,
+      "skipBigramPct": 0.06,
+      "skipBigram2Pct": 3.48,
+      "lsbPct": 0.8,
+      "scissorsPct": 0.08,
+      "pinkyScissorsPct": 0.4,
+      "wideScissorsPct": 0.55,
+      "altPct": 39.08,
+      "rollInPct": 23.79,
+      "rollOutPct": 15.41,
+      "redirectPct": 2.57,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 4.13,
+      "effort": 769.69,
+      "distance": 207.11,
+      "pinkyDist": 21.58,
+      "col56Pct": 16.46,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": "/",
+      "homeRight": "-",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "colemak",
+    "name": "Colemak",
+    "source": "https://colemak.com",
+    "cyanophageRef": "colemak",
+    "keys": "qwfpgjluy;arstdhneiozxcvbkm,./",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 0.91,
+      "skipBigramPct": 0.09,
+      "skipBigram2Pct": 4.24,
+      "lsbPct": 2.26,
+      "scissorsPct": 0.26,
+      "pinkyScissorsPct": 0.65,
+      "wideScissorsPct": 0.46,
+      "altPct": 25.43,
+      "rollInPct": 26.67,
+      "rollOutPct": 22.53,
+      "redirectPct": 9.22,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 0.78,
+      "effort": 634.08,
+      "distance": 190.66,
+      "pinkyDist": 4.79,
+      "col56Pct": 12.57,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": "-",
+      "homeRight": "'",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "colemak-dh",
+    "name": "Colemak-DH",
+    "source": "https://colemakmods.github.io/mod-dh/",
+    "cyanophageRef": "colemak-dh",
+    "keys": "qwfpbjluy;arstgmneiozxcdvkh,./",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 0.91,
+      "skipBigramPct": 0.09,
+      "skipBigram2Pct": 4.24,
+      "lsbPct": 1.27,
+      "scissorsPct": 0.15,
+      "pinkyScissorsPct": 0.65,
+      "wideScissorsPct": 0.32,
+      "altPct": 25.43,
+      "rollInPct": 26.67,
+      "rollOutPct": 22.53,
+      "redirectPct": 9.22,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 0.78,
+      "effort": 534.99,
+      "distance": 189.98,
+      "pinkyDist": 4.79,
+      "col56Pct": 7.95,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": "-",
+      "homeRight": "'",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "graphite",
+    "name": "Graphite",
+    "source": "https://github.com/rdavison/graphite-layout",
+    "cyanophageRef": "graphite",
+    "keys": "bldwz'foujnrtsgyhaeiqxmcvkp.-/",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 0.68,
+      "skipBigramPct": 0.04,
+      "skipBigram2Pct": 2.73,
+      "lsbPct": 0.87,
+      "scissorsPct": 0.41,
+      "pinkyScissorsPct": 0.25,
+      "wideScissorsPct": 0.93,
+      "altPct": 37.66,
+      "rollInPct": 22.18,
+      "rollOutPct": 23.83,
+      "redirectPct": 2.59,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 2.34,
+      "effort": 521.49,
+      "distance": 190.41,
+      "pinkyDist": 13.48,
+      "col56Pct": 6.38,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": ";",
+      "homeRight": ",",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "gallium",
+    "name": "Gallium",
+    "source": "https://github.com/GalileoBlues/Gallium",
+    "cyanophageRef": "gallium",
+    "keys": "bldcvzyou,nrtsgphaeiqxmwjkf';.",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 0.64,
+      "skipBigramPct": 0.03,
+      "skipBigram2Pct": 2.74,
+      "lsbPct": 0.97,
+      "scissorsPct": 0.95,
+      "pinkyScissorsPct": 0.49,
+      "wideScissorsPct": 1.34,
+      "altPct": 37.55,
+      "rollInPct": 21.8,
+      "rollOutPct": 24.26,
+      "redirectPct": 2.68,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 3.07,
+      "effort": 515.84,
+      "distance": 189.71,
+      "pinkyDist": 17.41,
+      "col56Pct": 6.3,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": "-",
+      "homeRight": "/",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "canary",
+    "name": "Canary",
+    "source": "https://github.com/Apsu/Canary",
+    "cyanophageRef": "canary",
+    "keys": "wlypbzfou;crstgmneiaqjvdkxh/,.",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 0.66,
+      "skipBigramPct": 0.02,
+      "skipBigram2Pct": 3.65,
+      "lsbPct": 1.75,
+      "scissorsPct": 0.42,
+      "pinkyScissorsPct": 0.38,
+      "wideScissorsPct": 0.75,
+      "altPct": 29.26,
+      "rollInPct": 24.87,
+      "rollOutPct": 25.49,
+      "redirectPct": 6.95,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 2.96,
+      "effort": 519.83,
+      "distance": 204.81,
+      "pinkyDist": 16.08,
+      "col56Pct": 6.98,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": "-",
+      "homeRight": "'",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "apt-v3",
+    "name": "APT v3",
+    "source": "https://github.com/Apsu/APT",
+    "cyanophageRef": "aptV3",
+    "keys": "wgdfbqluoyrsthkjneaixcmpvz,.'/",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 0.81,
+      "skipBigramPct": 0.06,
+      "skipBigram2Pct": 3.09,
+      "lsbPct": 0.33,
+      "scissorsPct": 0.11,
+      "pinkyScissorsPct": 1.12,
+      "wideScissorsPct": 0.38,
+      "altPct": 30.73,
+      "rollInPct": 34.89,
+      "rollOutPct": 14.66,
+      "redirectPct": 5.57,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 3.45,
+      "effort": 510.34,
+      "distance": 191.37,
+      "pinkyDist": 20.18,
+      "col56Pct": 3.68,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": "-",
+      "homeRight": ";",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "handsdown-neu",
+    "name": "Hands Down Neu",
+    "source": "https://sites.google.com/alanreiser.com/handsdown",
+    "cyanophageRef": "handsdown-neu",
+    "keys": "wfmpv/.q;'rsntb,aeihxcldg-uoyk",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 0.76,
+      "skipBigramPct": 0.05,
+      "skipBigram2Pct": 4.0,
+      "lsbPct": 1.26,
+      "scissorsPct": 0.42,
+      "pinkyScissorsPct": 0.59,
+      "wideScissorsPct": 0.67,
+      "altPct": 36.75,
+      "rollInPct": 33.34,
+      "rollOutPct": 10.7,
+      "redirectPct": 2.04,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 2.89,
+      "effort": 537.57,
+      "distance": 201.61,
+      "pinkyDist": 16.78,
+      "col56Pct": 5.73,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": "z",
+      "homeRight": "j",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "sturdy",
+    "name": "Sturdy",
+    "source": "https://github.com/o-x-e-y/oxeylyzer",
+    "cyanophageRef": "sturdy",
+    "keys": "vmlcpxfoujstrdy.naeizkqgwbh';,",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 0.62,
+      "skipBigramPct": 0.01,
+      "skipBigram2Pct": 2.8,
+      "lsbPct": 1.58,
+      "scissorsPct": 0.42,
+      "pinkyScissorsPct": 0.41,
+      "wideScissorsPct": 1.06,
+      "altPct": 32.16,
+      "rollInPct": 24.38,
+      "rollOutPct": 25.72,
+      "redirectPct": 5.01,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 2.09,
+      "effort": 575.18,
+      "distance": 200.2,
+      "pinkyDist": 12.34,
+      "col56Pct": 8.44,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": "-",
+      "homeRight": "/",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "engram",
+    "name": "Engram",
+    "source": "https://github.com/binarybottle/engram",
+    "cyanophageRef": "engram",
+    "keys": "byou'-ldwvciea,.htsngxjk/;rmfp",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 1.01,
+      "skipBigramPct": 0.13,
+      "skipBigram2Pct": 3.47,
+      "lsbPct": 0.41,
+      "scissorsPct": 0.36,
+      "pinkyScissorsPct": 0.71,
+      "wideScissorsPct": 1.12,
+      "altPct": 35.52,
+      "rollInPct": 29.94,
+      "rollOutPct": 14.37,
+      "redirectPct": 3.08,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 5.7,
+      "effort": 457.11,
+      "distance": 202.96,
+      "pinkyDist": 33.03,
+      "col56Pct": 2.72,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": "z",
+      "homeRight": "q",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "carbyne",
+    "name": "Carbyne",
+    "source": "https://cyanophage.github.io/index.html#carbyne",
+    "cyanophageRef": "carbyne",
+    "keys": "fwhgzqouypsnrtv-aeicbmldk;x,./",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 0.77,
+      "skipBigramPct": 0.11,
+      "skipBigram2Pct": 3.52,
+      "lsbPct": 0.32,
+      "scissorsPct": 0.19,
+      "pinkyScissorsPct": 0.4,
+      "wideScissorsPct": 0.37,
+      "altPct": 36.56,
+      "rollInPct": 23.34,
+      "rollOutPct": 20.13,
+      "redirectPct": 4.08,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 5.31,
+      "effort": 475.58,
+      "distance": 198.49,
+      "pinkyDist": 29.85,
+      "col56Pct": 2.29,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": "j",
+      "homeRight": "'",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "really",
+    "name": "Really?",
+    "source": "https://cyanophage.github.io/index.html#really?",
+    "cyanophageRef": "really?",
+    "keys": "yuolzqchgwiearxvsntd-/,.;jfpmb",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 0.68,
+      "skipBigramPct": 0.11,
+      "skipBigram2Pct": 3.16,
+      "lsbPct": 0.13,
+      "scissorsPct": 0.08,
+      "pinkyScissorsPct": 0.39,
+      "wideScissorsPct": 0.28,
+      "altPct": 27.02,
+      "rollInPct": 26.29,
+      "rollOutPct": 25.32,
+      "redirectPct": 6.81,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 5.4,
+      "effort": 446.8,
+      "distance": 196.58,
+      "pinkyDist": 31.55,
+      "col56Pct": 1.75,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": "k",
+      "homeRight": "'",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "whorf",
+    "name": "Whorf",
+    "source": "https://cyanophage.github.io/index.html#whorf",
+    "cyanophageRef": "whorf",
+    "keys": "flhdmvwou,srntkgyaeixjbzqpc';.",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 0.45,
+      "skipBigramPct": 0.02,
+      "skipBigram2Pct": 2.73,
+      "lsbPct": 1.66,
+      "scissorsPct": 0.77,
+      "pinkyScissorsPct": 0.64,
+      "wideScissorsPct": 1.63,
+      "altPct": 34.54,
+      "rollInPct": 22.89,
+      "rollOutPct": 23.77,
+      "redirectPct": 6.23,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 3.74,
+      "effort": 614.12,
+      "distance": 204.51,
+      "pinkyDist": 20.1,
+      "col56Pct": 8.56,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": "/",
+      "homeRight": "-",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "northstar",
+    "name": "Northstar",
+    "source": "https://cyanophage.github.io/index.html#northstar",
+    "cyanophageRef": "northstar",
+    "keys": "qwmbzjfou;nrstgyheiaxlcdvkp,./",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 0.86,
+      "skipBigramPct": 0.06,
+      "skipBigram2Pct": 3.95,
+      "lsbPct": 0.99,
+      "scissorsPct": 0.41,
+      "pinkyScissorsPct": 0.29,
+      "wideScissorsPct": 0.86,
+      "altPct": 35.35,
+      "rollInPct": 20.92,
+      "rollOutPct": 24.36,
+      "redirectPct": 2.93,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 0.87,
+      "effort": 509.25,
+      "distance": 196.63,
+      "pinkyDist": 5.55,
+      "col56Pct": 6.09,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": "-",
+      "homeRight": "'",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "semimak",
+    "name": "Semimak",
+    "source": "https://semilin.github.io/semimak",
+    "cyanophageRef": "semimak",
+    "keys": "flhvzqwuoysrntkcdeaix'bmjpg,./",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 0.59,
+      "skipBigramPct": 0.04,
+      "skipBigram2Pct": 2.76,
+      "lsbPct": 1.65,
+      "scissorsPct": 0.39,
+      "pinkyScissorsPct": 1.17,
+      "wideScissorsPct": 1.27,
+      "altPct": 36.13,
+      "rollInPct": 21.31,
+      "rollOutPct": 23.39,
+      "redirectPct": 6.44,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 3.76,
+      "effort": 553.38,
+      "distance": 193.51,
+      "pinkyDist": 20.81,
+      "col56Pct": 6.39,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": "-",
+      "homeRight": ";",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "mtgap",
+    "name": "MTGAP",
+    "source": "https://mathematicator.com/words/mtgap",
+    "cyanophageRef": "mtgap",
+    "keys": "ypoujkdlcwinea,mhtsrqz/.;bfgvx",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 0.92,
+      "skipBigramPct": 0.05,
+      "skipBigram2Pct": 3.27,
+      "lsbPct": 0.46,
+      "scissorsPct": 0.15,
+      "pinkyScissorsPct": 0.59,
+      "wideScissorsPct": 0.53,
+      "altPct": 33.86,
+      "rollInPct": 30.0,
+      "rollOutPct": 16.34,
+      "redirectPct": 2.54,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 3.8,
+      "effort": 521.04,
+      "distance": 194.05,
+      "pinkyDist": 22.36,
+      "col56Pct": 5.87,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": "-",
+      "homeRight": "'",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "ctgap",
+    "name": "CTGAP",
+    "source": "https://cyanophage.github.io/index.html#ctgap",
+    "cyanophageRef": "ctgap",
+    "keys": "qplcjxfou/rntsgyheiazbmwvkd',.",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 0.74,
+      "skipBigramPct": 0.04,
+      "skipBigram2Pct": 3.42,
+      "lsbPct": 1.01,
+      "scissorsPct": 0.68,
+      "pinkyScissorsPct": 0.58,
+      "wideScissorsPct": 0.99,
+      "altPct": 36.06,
+      "rollInPct": 18.91,
+      "rollOutPct": 26.54,
+      "redirectPct": 3.59,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 1.23,
+      "effort": 499.86,
+      "distance": 196.21,
+      "pinkyDist": 7.0,
+      "col56Pct": 6.2,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": "-",
+      "homeRight": ";",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "recurva",
+    "name": "Recurva",
+    "source": "https://cyanophage.github.io/index.html#recurva",
+    "cyanophageRef": "recurva",
+    "keys": "frdpvqjuoysntcb.heaizxkgwml;',",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 0.56,
+      "skipBigramPct": 0.08,
+      "skipBigram2Pct": 2.74,
+      "lsbPct": 1.19,
+      "scissorsPct": 0.44,
+      "pinkyScissorsPct": 1.09,
+      "wideScissorsPct": 2.33,
+      "altPct": 32.1,
+      "rollInPct": 24.0,
+      "rollOutPct": 26.19,
+      "redirectPct": 4.42,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 4.4,
+      "effort": 629.72,
+      "distance": 204.28,
+      "pinkyDist": 24.38,
+      "col56Pct": 7.83,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": "-",
+      "homeRight": "/",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "halmak",
+    "name": "Halmak",
+    "source": "https://github.com/MadRabbit/halmak",
+    "cyanophageRef": "halmak",
+    "keys": "wlrbzqgudjshnt,.aeoifmvc/;pxky",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 1.97,
+      "skipBigramPct": 0.08,
+      "skipBigram2Pct": 3.47,
+      "lsbPct": 0.4,
+      "scissorsPct": 0.56,
+      "pinkyScissorsPct": 1.56,
+      "wideScissorsPct": 0.97,
+      "altPct": 38.02,
+      "rollInPct": 21.51,
+      "rollOutPct": 18.6,
+      "redirectPct": 3.41,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 5.48,
+      "effort": 442.21,
+      "distance": 186.7,
+      "pinkyDist": 31.22,
+      "col56Pct": 2.3,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": "-",
+      "homeRight": "'",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "workman",
+    "name": "Workman",
+    "source": "https://workmanlayout.org",
+    "cyanophageRef": "workman",
+    "keys": "qdrwbjfup;ashtgyneoizxmcvkl,./",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 1.97,
+      "skipBigramPct": 0.18,
+      "skipBigram2Pct": 4.15,
+      "lsbPct": 1.11,
+      "scissorsPct": 0.47,
+      "pinkyScissorsPct": 0.57,
+      "wideScissorsPct": 0.87,
+      "altPct": 24.58,
+      "rollInPct": 25.75,
+      "rollOutPct": 21.65,
+      "redirectPct": 9.13,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 0.78,
+      "effort": 525.34,
+      "distance": 195.03,
+      "pinkyDist": 4.87,
+      "col56Pct": 7.44,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": "-",
+      "homeRight": "'",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "nerps",
+    "name": "Nerps",
+    "source": "https://cyanophage.github.io/index.html#nerps",
+    "cyanophageRef": "nerps",
+    "keys": "xldpvzkou;nrtsgyheia/jmcwbf',.",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 0.85,
+      "skipBigramPct": 0.03,
+      "skipBigram2Pct": 3.36,
+      "lsbPct": 1.24,
+      "scissorsPct": 1.12,
+      "pinkyScissorsPct": 0.25,
+      "wideScissorsPct": 1.8,
+      "altPct": 35.8,
+      "rollInPct": 20.13,
+      "rollOutPct": 26.18,
+      "redirectPct": 2.49,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 1.32,
+      "effort": 565.02,
+      "distance": 199.91,
+      "pinkyDist": 7.59,
+      "col56Pct": 8.34,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": "q",
+      "homeRight": "-",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "focal",
+    "name": "Focal",
+    "source": "https://cyanophage.github.io/index.html#focal",
+    "cyanophageRef": "focal",
+    "keys": "vlhgkqfoujsrntbycaeizxmdp'w.;,",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 0.53,
+      "skipBigramPct": 0.05,
+      "skipBigram2Pct": 3.23,
+      "lsbPct": 0.99,
+      "scissorsPct": 0.46,
+      "pinkyScissorsPct": 0.41,
+      "wideScissorsPct": 1.01,
+      "altPct": 34.83,
+      "rollInPct": 23.63,
+      "rollOutPct": 23.37,
+      "redirectPct": 4.22,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 2.09,
+      "effort": 537.81,
+      "distance": 202.83,
+      "pinkyDist": 12.34,
+      "col56Pct": 6.82,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": "-",
+      "homeRight": "/",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "isrt",
+    "name": "ISRT",
+    "source": "https://notgate.github.io/layout",
+    "cyanophageRef": "isrt",
+    "keys": "yclmkzfu,'isrtgpneaoqvwdjbh/.x",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 0.65,
+      "skipBigramPct": 0.04,
+      "skipBigram2Pct": 3.5,
+      "lsbPct": 1.51,
+      "scissorsPct": 0.28,
+      "pinkyScissorsPct": 1.11,
+      "wideScissorsPct": 0.58,
+      "altPct": 26.64,
+      "rollInPct": 23.44,
+      "rollOutPct": 27.25,
+      "redirectPct": 7.64,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 2.41,
+      "effort": 497.86,
+      "distance": 183.57,
+      "pinkyDist": 13.64,
+      "col56Pct": 6.65,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": "-",
+      "homeRight": ";",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "irst",
+    "name": "IRST",
+    "source": "https://cyanophage.github.io/index.html#irst",
+    "cyanophageRef": "irst",
+    "keys": "ylcmkzfu,'irstgbneaojxwdvph/.q",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 0.64,
+      "skipBigramPct": 0.02,
+      "skipBigram2Pct": 3.31,
+      "lsbPct": 1.45,
+      "scissorsPct": 0.11,
+      "pinkyScissorsPct": 1.0,
+      "wideScissorsPct": 0.68,
+      "altPct": 27.13,
+      "rollInPct": 24.59,
+      "rollOutPct": 26.27,
+      "redirectPct": 7.8,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 2.39,
+      "effort": 538.61,
+      "distance": 184.39,
+      "pinkyDist": 13.43,
+      "col56Pct": 7.56,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": "-",
+      "homeRight": ";",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "hyperroll",
+    "name": "Hyperroll",
+    "source": "https://cyanophage.github.io/index.html#hyperroll",
+    "cyanophageRef": "hyperroll",
+    "keys": "pclmvxuoyfnsrtd.aeihbg'wz/,qjk",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 0.8,
+      "skipBigramPct": 0.03,
+      "skipBigram2Pct": 3.2,
+      "lsbPct": 0.76,
+      "scissorsPct": 0.24,
+      "pinkyScissorsPct": 1.71,
+      "wideScissorsPct": 0.69,
+      "altPct": 36.33,
+      "rollInPct": 36.61,
+      "rollOutPct": 9.17,
+      "redirectPct": 1.9,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 5.57,
+      "effort": 507.2,
+      "distance": 193.02,
+      "pinkyDist": 31.32,
+      "col56Pct": 6.07,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": "-",
+      "homeRight": ";",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "pine-v1",
+    "name": "Pine v1",
+    "source": "https://cyanophage.github.io/index.html#pine_v1",
+    "cyanophageRef": "pine_v1",
+    "keys": "ylrdwjmou,csntgphaeixzqvkbf'/.",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 0.9,
+      "skipBigramPct": 0.05,
+      "skipBigram2Pct": 2.97,
+      "lsbPct": 2.44,
+      "scissorsPct": 0.97,
+      "pinkyScissorsPct": 0.59,
+      "wideScissorsPct": 1.71,
+      "altPct": 31.53,
+      "rollInPct": 21.51,
+      "rollOutPct": 27.64,
+      "redirectPct": 4.66,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 3.57,
+      "effort": 575.12,
+      "distance": 207.98,
+      "pinkyDist": 19.15,
+      "col56Pct": 8.33,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": "-",
+      "homeRight": ";",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "pine-v4",
+    "name": "Pine v4",
+    "source": "https://cyanophage.github.io/index.html#pine_v4",
+    "cyanophageRef": "pine_v4",
+    "keys": "qlcmk'fuoynrstwpheaijxzgvbd;,.",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 0.69,
+      "skipBigramPct": 0.09,
+      "skipBigram2Pct": 2.9,
+      "lsbPct": 1.47,
+      "scissorsPct": 0.26,
+      "pinkyScissorsPct": 0.84,
+      "wideScissorsPct": 1.2,
+      "altPct": 35.91,
+      "rollInPct": 22.55,
+      "rollOutPct": 23.3,
+      "redirectPct": 4.66,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 2.81,
+      "effort": 574.16,
+      "distance": 192.75,
+      "pinkyDist": 15.99,
+      "col56Pct": 7.67,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": "-",
+      "homeRight": "/",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "beakl19bis",
+    "name": "BEAKL19bis",
+    "source": "https://cyanophage.github.io/index.html#beakl19bis",
+    "cyanophageRef": "beakl19bis",
+    "keys": "qyouzwdnckhiea,gtrspj'/.xvmlfb",
+    "formFactors": [
+      "ansi",
+      "ortho",
+      "columnar"
+    ],
+    "requiresThumbCluster": false,
+    "stats": {
+      "sfbPct": 0.95,
+      "skipBigramPct": 0.09,
+      "skipBigram2Pct": 4.07,
+      "lsbPct": 1.52,
+      "scissorsPct": 0.39,
+      "pinkyScissorsPct": 0.19,
+      "wideScissorsPct": 0.76,
+      "altPct": 36.38,
+      "rollInPct": 32.63,
+      "rollOutPct": 11.11,
+      "redirectPct": 2.03,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 2.26,
+      "effort": 517.32,
+      "distance": 220.88,
+      "pinkyDist": 12.45,
+      "col56Pct": 6.15,
+      "_dataSource": "cyanophage"
+    },
+    "outerKeys": {
+      "topRight": "-",
+      "homeRight": ";",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "maltron",
+    "name": "Maltron",
+    "source": "https://maltron.com",
+    "cyanophageRef": "maltron",
+    "keys": "qpycbvmuzlanisfdthor,.jg;/wk-x",
+    "formFactors": [
+      "columnar"
+    ],
+    "requiresThumbCluster": true,
+    "stats": {
+      "sfbPct": 0.66,
+      "skipBigramPct": 0.02,
+      "skipBigram2Pct": 2.74,
+      "lsbPct": 0.7,
+      "scissorsPct": 0.11,
+      "pinkyScissorsPct": 0.98,
+      "wideScissorsPct": 0.29,
+      "altPct": 25.55,
+      "rollInPct": 23.62,
+      "rollOutPct": 25.43,
+      "redirectPct": 6.49,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 4.86,
+      "effort": 518.95,
+      "distance": 157.82,
+      "pinkyDist": 24.12,
+      "col56Pct": 9.56,
+      "_dataSource": "cyanophage"
+    },
+    "thumbKeys": {
+      "left": [
+        "e"
+      ]
+    },
+    "outerKeys": {
+      "topRight": "=",
+      "homeRight": "'",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "rsthd",
+    "name": "RSTHD",
+    "source": "https://xsznix.wordpress.com/2016/05/16/introducing-the-rsthd-layout/",
+    "cyanophageRef": "rsthd",
+    "keys": "jcyfkzl,uqrsthdmnaio/vgpbxw.;-",
+    "formFactors": [
+      "columnar"
+    ],
+    "requiresThumbCluster": true,
+    "stats": {
+      "sfbPct": 0.7,
+      "skipBigramPct": 0.05,
+      "skipBigram2Pct": 2.94,
+      "lsbPct": 0.81,
+      "scissorsPct": 0.09,
+      "pinkyScissorsPct": 0.99,
+      "wideScissorsPct": 0.21,
+      "altPct": 20.6,
+      "rollInPct": 33.82,
+      "rollOutPct": 15.54,
+      "redirectPct": 5.95,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 0.79,
+      "effort": 510.19,
+      "distance": 156.29,
+      "pinkyDist": 4.48,
+      "col56Pct": 9.71,
+      "_dataSource": "cyanophage"
+    },
+    "thumbKeys": {
+      "left": [
+        "e"
+      ]
+    },
+    "outerKeys": {
+      "topRight": "=",
+      "homeRight": "'",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "dsthk",
+    "name": "DSTHK",
+    "source": "https://cyanophage.github.io/index.html#dsthk",
+    "cyanophageRef": "dsthk",
+    "keys": "zcwbj-mu'qdsthkvniaofgpr;xly,.",
+    "formFactors": [
+      "columnar"
+    ],
+    "requiresThumbCluster": true,
+    "stats": {
+      "sfbPct": 0.87,
+      "skipBigramPct": 0.14,
+      "skipBigram2Pct": 3.48,
+      "lsbPct": 0.42,
+      "scissorsPct": 0.43,
+      "pinkyScissorsPct": 0.12,
+      "wideScissorsPct": 0.7,
+      "altPct": 20.1,
+      "rollInPct": 34.35,
+      "rollOutPct": 14.67,
+      "redirectPct": 6.12,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 2.82,
+      "effort": 379.15,
+      "distance": 168.56,
+      "pinkyDist": 14.73,
+      "col56Pct": 2.81,
+      "_dataSource": "cyanophage"
+    },
+    "thumbKeys": {
+      "left": [
+        "e"
+      ]
+    },
+    "outerKeys": {
+      "topRight": "=",
+      "homeRight": "/",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "aptmak",
+    "name": "APTmak",
+    "source": "https://github.com/Apsu/APT",
+    "cyanophageRef": "aptmak",
+    "keys": "vwfpbjluy'rsthkxnaio/cgdqzm,.-",
+    "formFactors": [
+      "columnar"
+    ],
+    "requiresThumbCluster": true,
+    "stats": {
+      "sfbPct": 0.75,
+      "skipBigramPct": 0.09,
+      "skipBigram2Pct": 2.74,
+      "lsbPct": 0.17,
+      "scissorsPct": 0.29,
+      "pinkyScissorsPct": 0.6,
+      "wideScissorsPct": 0.5,
+      "altPct": 21.21,
+      "rollInPct": 32.84,
+      "rollOutPct": 15.62,
+      "redirectPct": 5.64,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 1.53,
+      "effort": 393.84,
+      "distance": 156.43,
+      "pinkyDist": 9.27,
+      "col56Pct": 3.16,
+      "_dataSource": "cyanophage"
+    },
+    "thumbKeys": {
+      "left": [
+        "e"
+      ]
+    },
+    "outerKeys": {
+      "topRight": "=",
+      "homeRight": ";",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "caster",
+    "name": "Caster",
+    "source": "https://cyanophage.github.io/index.html#caster",
+    "cyanophageRef": "caster",
+    "keys": "bwdl;/foujcstrxqnaihvygmz=p.,k",
+    "formFactors": [
+      "columnar"
+    ],
+    "requiresThumbCluster": true,
+    "stats": {
+      "sfbPct": 0.63,
+      "skipBigramPct": 0.07,
+      "skipBigram2Pct": 2.71,
+      "lsbPct": 0.05,
+      "scissorsPct": 0.54,
+      "pinkyScissorsPct": 0.35,
+      "wideScissorsPct": 1.21,
+      "altPct": 25.64,
+      "rollInPct": 30.15,
+      "rollOutPct": 18.63,
+      "redirectPct": 3.12,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 3.4,
+      "effort": 353.33,
+      "distance": 173.42,
+      "pinkyDist": 18.8,
+      "col56Pct": 0.61,
+      "_dataSource": "cyanophage"
+    },
+    "thumbKeys": {
+      "left": [
+        "e"
+      ]
+    },
+    "outerKeys": {
+      "topRight": "-",
+      "homeRight": "'",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "hd-vibranium",
+    "name": "HD Vibranium",
+    "source": "https://sites.google.com/alanreiser.com/handsdown",
+    "cyanophageRef": "hd-vibranium",
+    "keys": "xwmgqz.'jbscntk,aeihvpld/-uoyf",
+    "formFactors": [
+      "columnar"
+    ],
+    "requiresThumbCluster": true,
+    "stats": {
+      "sfbPct": 0.57,
+      "skipBigramPct": 0.06,
+      "skipBigram2Pct": 3.21,
+      "lsbPct": 0.36,
+      "scissorsPct": 0.44,
+      "pinkyScissorsPct": 0.8,
+      "wideScissorsPct": 1.0,
+      "altPct": 36.07,
+      "rollInPct": 34.12,
+      "rollOutPct": 12.31,
+      "redirectPct": 1.6,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 4.11,
+      "effort": 423.86,
+      "distance": 176.51,
+      "pinkyDist": 22.3,
+      "col56Pct": 2.27,
+      "_dataSource": "cyanophage"
+    },
+    "thumbKeys": {
+      "left": [
+        "r"
+      ]
+    },
+    "outerKeys": {
+      "topRight": ";",
+      "homeRight": "=",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "hd-promethium",
+    "name": "HD Promethium",
+    "source": "https://sites.google.com/alanreiser.com/handsdown",
+    "cyanophageRef": "hd-promethium",
+    "keys": "fpdlx;uoybsnthk,aeicvwgmj-.'=/",
+    "formFactors": [
+      "columnar"
+    ],
+    "requiresThumbCluster": true,
+    "stats": {
+      "sfbPct": 0.58,
+      "skipBigramPct": 0.06,
+      "skipBigram2Pct": 3.05,
+      "lsbPct": 0.25,
+      "scissorsPct": 0.11,
+      "pinkyScissorsPct": 0.42,
+      "wideScissorsPct": 0.45,
+      "altPct": 36.98,
+      "rollInPct": 30.54,
+      "rollOutPct": 14.68,
+      "redirectPct": 2.03,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 4.08,
+      "effort": 398.09,
+      "distance": 175.32,
+      "pinkyDist": 22.84,
+      "col56Pct": 2.5,
+      "_dataSource": "cyanophage"
+    },
+    "thumbKeys": {
+      "left": [
+        "r"
+      ]
+    },
+    "outerKeys": {
+      "topRight": "z",
+      "homeRight": "q",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "snth",
+    "name": "SNTH",
+    "source": "https://cyanophage.github.io/index.html#snth",
+    "cyanophageRef": "snth",
+    "keys": "xpdmq=you,snthvgcaeifbkljzw'/.",
+    "formFactors": [
+      "columnar"
+    ],
+    "requiresThumbCluster": true,
+    "stats": {
+      "sfbPct": 0.36,
+      "skipBigramPct": 0.04,
+      "skipBigram2Pct": 2.3,
+      "lsbPct": 0.45,
+      "scissorsPct": 0.64,
+      "pinkyScissorsPct": 0.57,
+      "wideScissorsPct": 1.07,
+      "altPct": 37.94,
+      "rollInPct": 27.61,
+      "rollOutPct": 18.49,
+      "redirectPct": 2.99,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 3.76,
+      "effort": 418.16,
+      "distance": 169.24,
+      "pinkyDist": 20.39,
+      "col56Pct": 3.73,
+      "_dataSource": "cyanophage"
+    },
+    "thumbKeys": {
+      "left": [
+        "r"
+      ]
+    },
+    "outerKeys": {
+      "topRight": "-",
+      "homeRight": ";",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "sunlight",
+    "name": "Sunlight",
+    "source": "https://cyanophage.github.io/index.html#sunlight",
+    "cyanophageRef": "sunlight",
+    "keys": "fwhgk,ouypsnltv.aeicxbmdq=;/-z",
+    "formFactors": [
+      "columnar"
+    ],
+    "requiresThumbCluster": true,
+    "stats": {
+      "sfbPct": 0.47,
+      "skipBigramPct": 0.04,
+      "skipBigram2Pct": 2.77,
+      "lsbPct": 0.32,
+      "scissorsPct": 0.04,
+      "pinkyScissorsPct": 0.37,
+      "wideScissorsPct": 0.11,
+      "altPct": 38.12,
+      "rollInPct": 23.56,
+      "rollOutPct": 20.67,
+      "redirectPct": 3.34,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 4.32,
+      "effort": 458.46,
+      "distance": 179.1,
+      "pinkyDist": 23.7,
+      "col56Pct": 4.19,
+      "_dataSource": "cyanophage"
+    },
+    "thumbKeys": {
+      "left": [
+        "r"
+      ]
+    },
+    "outerKeys": {
+      "topRight": "j",
+      "homeRight": "'",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "nordrassil",
+    "name": "Nordrassil",
+    "source": "https://cyanophage.github.io/index.html#nordrassil",
+    "cyanophageRef": "nordrassil",
+    "keys": "jyou-qgnwkhiea.mdrspx/',;zclfb",
+    "formFactors": [
+      "columnar"
+    ],
+    "requiresThumbCluster": true,
+    "stats": {
+      "sfbPct": 0.71,
+      "skipBigramPct": 0.06,
+      "skipBigram2Pct": 3.19,
+      "lsbPct": 0.37,
+      "scissorsPct": 0.37,
+      "pinkyScissorsPct": 0.18,
+      "wideScissorsPct": 0.64,
+      "altPct": 38.74,
+      "rollInPct": 32.98,
+      "rollOutPct": 11.02,
+      "redirectPct": 1.07,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 3.06,
+      "effort": 428.19,
+      "distance": 192.71,
+      "pinkyDist": 16.25,
+      "col56Pct": 4.23,
+      "_dataSource": "cyanophage"
+    },
+    "thumbKeys": {
+      "right": [
+        "t"
+      ]
+    },
+    "outerKeys": {
+      "topRight": "=",
+      "homeRight": "v",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "night",
+    "name": "Night",
+    "source": "https://cyanophage.github.io/index.html#night",
+    "cyanophageRef": "night",
+    "keys": "bflkqpgou.nshtmycaeixvjdz'w-/,",
+    "formFactors": [
+      "columnar"
+    ],
+    "requiresThumbCluster": true,
+    "stats": {
+      "sfbPct": 0.41,
+      "skipBigramPct": 0.03,
+      "skipBigram2Pct": 2.3,
+      "lsbPct": 1.26,
+      "scissorsPct": 0.63,
+      "pinkyScissorsPct": 0.44,
+      "wideScissorsPct": 0.78,
+      "altPct": 38.22,
+      "rollInPct": 23.24,
+      "rollOutPct": 22.17,
+      "redirectPct": 4.03,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 3.06,
+      "effort": 491.42,
+      "distance": 172.77,
+      "pinkyDist": 16.95,
+      "col56Pct": 7.58,
+      "_dataSource": "cyanophage"
+    },
+    "thumbKeys": {
+      "left": [
+        "r"
+      ]
+    },
+    "outerKeys": {
+      "topRight": "=",
+      "homeRight": ";",
+      "bottomLeft": "\\"
+    }
+  },
+  {
+    "id": "enthium",
+    "name": "Enthium",
+    "source": "https://github.com/Gelidus/enthium",
+    "cyanophageRef": "enthium",
+    "keys": "qyuo/xldwzciea,khtns'-=.;jmgpf",
+    "formFactors": [
+      "columnar"
+    ],
+    "requiresThumbCluster": true,
+    "stats": {
+      "sfbPct": 0.48,
+      "skipBigramPct": 0.06,
+      "skipBigram2Pct": 2.76,
+      "lsbPct": 0.18,
+      "scissorsPct": 0.08,
+      "pinkyScissorsPct": 0.35,
+      "wideScissorsPct": 0.53,
+      "altPct": 37.93,
+      "rollInPct": 28.08,
+      "rollOutPct": 16.71,
+      "redirectPct": 2.66,
+      "weakRedirectPct": -1,
+      "offHomePinkyPct": 3.23,
+      "effort": 443.09,
+      "distance": 173.14,
+      "pinkyDist": 24.45,
+      "col56Pct": 2.41,
+      "_dataSource": "cyanophage"
+    },
+    "thumbKeys": {
+      "right": [
+        "r"
+      ]
+    },
+    "outerKeys": {
+      "homeLeft": "b",
+      "homeRight": "v",
+      "topRight": "*",
+      "bottomLeft": "\\"
+    }
+  }
+]

@@ -1,0 +1,74 @@
+import { memo } from 'react';
+import { Link } from 'react-router-dom';
+import type { Layout } from '../../types';
+import { KeyboardViz } from '../KeyboardViz/KeyboardViz';
+
+interface LayoutCardProps {
+  layout: Layout;
+  matchPct?: number;
+}
+
+function badgeClass(pct: number): string {
+  if (pct >= 75) return 'bg-green-500/20 text-green-400';
+  if (pct >= 50) return 'bg-yellow-500/20 text-yellow-400';
+  return 'bg-red-500/20 text-red-400';
+}
+
+function LayoutCardInner({ layout, matchPct }: LayoutCardProps) {
+  return (
+    <Link
+      to={`/browse/${layout.id}`}
+      className="block rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 hover:shadow-md transition-shadow"
+      aria-label={`View details for ${layout.name}`}
+    >
+      <div className="flex items-start justify-between mb-3">
+        <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100">
+          {layout.name}
+        </h3>
+        <div className="flex items-center gap-1.5 shrink-0">
+          {matchPct !== undefined && (
+            <span className={`text-xs font-bold px-1.5 py-0.5 rounded-md ${badgeClass(matchPct)}`}>
+              {matchPct.toFixed(1)}%
+            </span>
+          )}
+          {layout.requiresThumbCluster && (
+            <span
+              className="text-lg"
+              title="Optimized for keyboards with thumb cluster keys"
+              aria-label="Requires thumb cluster"
+            >
+              🦾
+            </span>
+          )}
+        </div>
+      </div>
+
+      <div className="mb-3">
+        <KeyboardViz layout={layout} size="sm" />
+      </div>
+
+      <div className="grid grid-cols-3 gap-2 text-xs text-gray-600 dark:text-gray-400">
+        <div className="text-center">
+          <div className="font-medium text-gray-900 dark:text-gray-200">
+            {layout.stats.sfbPct.toFixed(2)}%
+          </div>
+          <div>SFB</div>
+        </div>
+        <div className="text-center">
+          <div className="font-medium text-gray-900 dark:text-gray-200">
+            {layout.stats.altPct.toFixed(1)}%
+          </div>
+          <div>Alt</div>
+        </div>
+        <div className="text-center">
+          <div className="font-medium text-gray-900 dark:text-gray-200">
+            {(layout.stats.rollInPct + layout.stats.rollOutPct).toFixed(1)}%
+          </div>
+          <div>Rolls</div>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+export const LayoutCard = memo(LayoutCardInner);
