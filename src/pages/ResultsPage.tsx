@@ -376,10 +376,33 @@ interface ResultsPageInnerProps {
   urlSeed: ReturnType<typeof decodeProfile>;
 }
 
+function buildShareUrl(currentUrl: URL): string {
+  const isGitHubPages = currentUrl.hostname.endsWith('github.io');
+  if (!isGitHubPages) {
+    return currentUrl.toString();
+  }
+
+  const basePath = appPath('/').replace(/\/$/, '');
+  const basePrefix = `${basePath}/`;
+  const relativePath = currentUrl.pathname.startsWith(basePrefix)
+    ? currentUrl.pathname.slice(basePrefix.length)
+    : currentUrl.pathname.replace(/^\//, '');
+
+  const query = currentUrl.search ? `&${currentUrl.search.slice(1)}` : '';
+  const hash = currentUrl.hash ?? '';
+  return `${currentUrl.origin}${basePath}/?/${relativePath}${query}${hash}`;
+}
+
 function ResultsPageInner({ urlSeed }: ResultsPageInnerProps) {
   const { state } = useTestResults();
   const [, setSearchParams] = useSearchParams();
   const ctrl = useResultsPageController(state.results, layouts, urlSeed);
+
+  function handleCopyShareUrl() {
+    const currentUrl = new URL(window.location.href);
+    const shareUrl = buildShareUrl(currentUrl);
+    navigator.clipboard.writeText(shareUrl).catch(() => {});
+  }
 
   // Keep URL in sync with current active profile
   useEffect(() => {
@@ -401,10 +424,7 @@ function ResultsPageInner({ urlSeed }: ResultsPageInnerProps) {
               ? 'Viewing shared results. '
               : 'Based on your typing test, here are your top layout matches. '}
             <button
-              onClick={() => {
-                const url = `${window.location.origin}${window.location.pathname}${window.location.search}`;
-                navigator.clipboard.writeText(url).catch(() => {});
-              }}
+              onClick={handleCopyShareUrl}
               className="text-sm text-blue-500 hover:underline"
               aria-label="Copy shareable link to clipboard"
             >
