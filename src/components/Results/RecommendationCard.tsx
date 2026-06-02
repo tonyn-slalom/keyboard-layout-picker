@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import type { RankedLayout } from '../../types';
 import { KeyboardViz } from '../KeyboardViz/KeyboardViz';
 import { FingerUsageChart } from '../FingerUsage/FingerUsageChart';
+import { appPath } from '../../utils/appPath';
 
 interface RecommendationCardProps {
   ranked: RankedLayout;
@@ -65,7 +66,7 @@ export function RecommendationCard({ ranked, rank }: RecommendationCardProps) {
 
       <div className="flex gap-2 flex-wrap">
         <Link
-          to={`/browse/${layout.id}`}
+          to={appPath(`/browse/${layout.id}`)}
           aria-label={`View full stats for ${layout.name}`}
           className="px-3 py-1.5 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-colors"
         >
