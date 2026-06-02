@@ -2,6 +2,7 @@ import type { Layout } from '../../types';
 import { KeyboardViz } from '../KeyboardViz/KeyboardViz';
 import { FingerUsageChart } from '../FingerUsage/FingerUsageChart';
 import { TryoutPanel } from '../Tryout/TryoutPanel';
+import { buildShareUrl } from '../../utils/shareUrl';
 
 interface LayoutDetailProps {
   layout: Layout;
@@ -28,6 +29,11 @@ function formatStat(value: number | undefined): string {
 }
 
 export function LayoutDetail({ layout }: LayoutDetailProps) {
+  function handleCopyShareLink() {
+    const currentUrl = new URL(window.location.href);
+    const shareUrl = buildShareUrl(currentUrl);
+    navigator.clipboard.writeText(shareUrl).catch(() => {});
+  }
 
   return (
     <div className="max-w-3xl mx-auto">
@@ -97,6 +103,14 @@ export function LayoutDetail({ layout }: LayoutDetailProps) {
             Source ↗
           </a>
         )}
+        <button
+          type="button"
+          onClick={handleCopyShareLink}
+          aria-label={`Copy share link for ${layout.name}`}
+          className="px-4 py-2 rounded-lg border border-cyan-300 dark:border-cyan-700 text-cyan-700 dark:text-cyan-300 text-sm font-medium hover:bg-cyan-50 dark:hover:bg-cyan-950/40 transition-colors"
+        >
+          Copy share link
+        </button>
       </div>
 
       <div className="mt-8">

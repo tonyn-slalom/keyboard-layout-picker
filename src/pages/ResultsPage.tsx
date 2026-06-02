@@ -5,6 +5,7 @@ import layoutsData from '../data/layouts.json';
 import { useTestResults } from '../context/TestResultsContext';
 import { useResultsPageController } from './ResultsPage.controller';
 import { appPath } from '../utils/appPath';
+import { buildShareUrl } from '../utils/shareUrl';
 import { RadarChart } from '../components/Results/RadarChart';
 import { RecommendationCard } from '../components/Results/RecommendationCard';
 import { CATEGORY_IDS, POSITIVE_CATEGORIES } from '../utils/scoring';
@@ -374,23 +375,6 @@ export default function ResultsPage() {
 
 interface ResultsPageInnerProps {
   urlSeed: ReturnType<typeof decodeProfile>;
-}
-
-function buildShareUrl(currentUrl: URL): string {
-  const isGitHubPages = currentUrl.hostname.endsWith('github.io');
-  if (!isGitHubPages) {
-    return currentUrl.toString();
-  }
-
-  const basePath = appPath('/').replace(/\/$/, '');
-  const basePrefix = `${basePath}/`;
-  const relativePath = currentUrl.pathname.startsWith(basePrefix)
-    ? currentUrl.pathname.slice(basePrefix.length)
-    : currentUrl.pathname.replace(/^\//, '');
-
-  const query = currentUrl.search ? `&${currentUrl.search.slice(1)}` : '';
-  const hash = currentUrl.hash ?? '';
-  return `${currentUrl.origin}${basePath}/?/${relativePath}${query}${hash}`;
 }
 
 function ResultsPageInner({ urlSeed }: ResultsPageInnerProps) {
