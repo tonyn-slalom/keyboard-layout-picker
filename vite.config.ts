@@ -4,6 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 // @ts-ignore — vitest config not in vite types; picked up by vitest at test time
 export default defineConfig({
+  base: '/keyboard-layout-picker/',
   plugins: [
     tailwindcss(),
     react(),
