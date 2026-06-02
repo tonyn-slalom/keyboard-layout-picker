@@ -1,7 +1,6 @@
 import { memo } from 'react';
 import type { Layout } from '../../types';
 import { KeyboardViz } from '../KeyboardViz/KeyboardViz';
-import { appPath } from '../../utils/appPath';
 
 interface LayoutHighlight {
   label: string;
@@ -25,7 +24,7 @@ function LayoutCardInner({ layout, matchPct, highlights }: LayoutCardProps) {
 
   return (
     <a
-      href={appPath(`/browse/${layout.id}`)}
+      href={`./${layout.id}`}
       className="block rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 hover:shadow-md transition-shadow"
       aria-label={`View details for ${layout.name}`}
     >
