@@ -1,5 +1,4 @@
 import { memo } from 'react';
-import { Link } from 'react-router-dom';
 import type { Layout } from '../../types';
 import { KeyboardViz } from '../KeyboardViz/KeyboardViz';
 import { appPath } from '../../utils/appPath';
@@ -25,8 +24,8 @@ function LayoutCardInner({ layout, matchPct, highlights }: LayoutCardProps) {
   const displayHighlights = highlights ?? [];
 
   return (
-    <Link
-      to={appPath(`/browse/${layout.id}`)}
+    <a
+      href={appPath(`/browse/${layout.id}`)}
       className="block rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 hover:shadow-md transition-shadow"
       aria-label={`View details for ${layout.name}`}
     >
@@ -66,7 +65,7 @@ function LayoutCardInner({ layout, matchPct, highlights }: LayoutCardProps) {
           </div>
         ))}
       </div>
-    </Link>
+    </a>
   );
 }
 

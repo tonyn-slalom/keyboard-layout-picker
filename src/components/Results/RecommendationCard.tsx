@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import type { RankedLayout } from '../../types';
 import { KeyboardViz } from '../KeyboardViz/KeyboardViz';
 import { FingerUsageChart } from '../FingerUsage/FingerUsageChart';
@@ -65,13 +64,13 @@ export function RecommendationCard({ ranked, rank }: RecommendationCardProps) {
       </ul>
 
       <div className="flex gap-2 flex-wrap">
-        <Link
-          to={appPath(`/browse/${layout.id}`)}
+        <a
+          href={appPath(`/browse/${layout.id}`)}
           aria-label={`View full stats for ${layout.name}`}
           className="px-3 py-1.5 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-colors"
         >
           View full stats
-        </Link>
+        </a>
         <a
           href={`https://cyanophage.github.io/playground.html#${layout.cyanophageRef}`}
           target="_blank"
