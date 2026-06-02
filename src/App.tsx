@@ -74,7 +74,7 @@ export default function App() {
   const [darkMode, setDarkMode] = useState(
     window.matchMedia('(prefers-color-scheme: dark)').matches,
   );
-  const routerBase = import.meta.env.BASE_URL;
+  const routerBase = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   function handleToggleDark() {
     setDarkMode(prev => !prev);
