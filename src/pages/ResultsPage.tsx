@@ -4,6 +4,7 @@ import type { CategoryId, Layout } from '../types';
 import layoutsData from '../data/layouts.json';
 import { useTestResults } from '../context/TestResultsContext';
 import { useResultsPageController } from './ResultsPage.controller';
+import { appPath } from '../utils/appPath';
 import { RadarChart } from '../components/Results/RadarChart';
 import { RecommendationCard } from '../components/Results/RecommendationCard';
 import { CATEGORY_IDS, POSITIVE_CATEGORIES } from '../utils/scoring';
@@ -365,7 +366,7 @@ export default function ResultsPage() {
   const urlSeed = decodeProfile(searchParams);
 
   if (state.results.length === 0 && urlSeed === null) {
-    return <Navigate to="/test" replace />;
+    return <Navigate to={appPath('/test')} replace />;
   }
 
   return <ResultsPageInner urlSeed={urlSeed} />;

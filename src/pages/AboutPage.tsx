@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { sequences } from '../utils/sequences';
 import type { CategoryId } from '../types';
+import { appPath } from '../utils/appPath';
 
 interface DetailSection {
   heading: string;
@@ -284,13 +285,13 @@ export default function AboutPage() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
-              to="/test"
+              to={appPath('/test')}
               className="rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
             >
               Start the test
             </Link>
             <Link
-              to="/browse"
+              to={appPath('/browse')}
               className="rounded-xl border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200 dark:hover:bg-gray-800"
             >
               Browse layouts

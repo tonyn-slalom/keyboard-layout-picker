@@ -4,6 +4,7 @@ import type { Sequence, SequenceResult } from '../../types';
 import { sequences } from '../../utils/sequences';
 import { useTestStreamController } from './TestStream.controller';
 import { useTestResults } from '../../context/TestResultsContext';
+import { appPath } from '../../utils/appPath';
 
 // Distance from the left edge of the stream container where the caret is pinned
 const CARET_X = 200;
@@ -65,7 +66,7 @@ export function TestStream() {
 
   function handleComplete(results: SequenceResult[]) {
     dispatch({ type: 'SET_RESULTS', results });
-    navigate('/results');
+    navigate(appPath('/results'));
   }
 
   const runSequences = useMemo(() => buildRunSequences(sequences), []);
@@ -86,7 +87,7 @@ export function TestStream() {
   }, [globalCharIdx]);
 
   useEffect(() => {
-    if (ctrl.status === 'complete') navigate('/results');
+    if (ctrl.status === 'complete') navigate(appPath('/results'));
   }, [ctrl.status, navigate]);
 
   const chars = useMemo(() => [...flat], [flat]);

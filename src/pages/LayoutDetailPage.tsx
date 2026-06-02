@@ -2,6 +2,7 @@ import { useParams, Navigate } from 'react-router-dom';
 import type { Layout } from '../types';
 import layoutsData from '../data/layouts.json';
 import { LayoutDetail } from '../components/LayoutBrowser/LayoutDetail';
+import { appPath } from '../utils/appPath';
 
 const layouts = layoutsData as Layout[];
 
@@ -10,7 +11,7 @@ export default function LayoutDetailPage() {
   const layout = layouts.find(l => l.id === id);
 
   if (!layout) {
-    return <Navigate to="/browse" replace />;
+    return <Navigate to={appPath('/browse')} replace />;
   }
 
   return (

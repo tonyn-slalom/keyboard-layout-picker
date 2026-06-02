@@ -7,12 +7,13 @@ import TestPage from './pages/TestPage';
 import ResultsPage from './pages/ResultsPage';
 import LayoutDetailPage from './pages/LayoutDetailPage';
 import AboutPage from './pages/AboutPage';
+import { appPath } from './utils/appPath';
 
 function NavBar({ darkMode, onToggleDark }: { darkMode: boolean; onToggleDark: () => void }) {
   return (
     <nav className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-4 py-3 flex items-center justify-between">
       <Link
-        to="/"
+        to={appPath('/')}
         className="text-lg font-bold text-gray-900 dark:text-white tracking-tight"
         aria-label="Keyboard Layout Picker home"
       >
@@ -20,7 +21,7 @@ function NavBar({ darkMode, onToggleDark }: { darkMode: boolean; onToggleDark: (
       </Link>
       <div className="flex items-center gap-4">
         <NavLink
-          to="/test"
+          to={appPath('/test')}
           aria-label="Take the typing test"
           className={({ isActive }) =>
             `text-sm font-medium transition-colors ${
@@ -33,7 +34,7 @@ function NavBar({ darkMode, onToggleDark }: { darkMode: boolean; onToggleDark: (
           Test
         </NavLink>
         <NavLink
-          to="/browse"
+          to={appPath('/browse')}
           aria-label="Browse layouts"
           className={({ isActive }) =>
             `text-sm font-medium transition-colors ${
@@ -46,7 +47,7 @@ function NavBar({ darkMode, onToggleDark }: { darkMode: boolean; onToggleDark: (
           Browse
         </NavLink>
         <NavLink
-          to="/about"
+          to={appPath('/about')}
           aria-label="Learn more about Keyboard Layout Picker"
           className={({ isActive }) =>
             `text-sm font-medium transition-colors ${
@@ -74,7 +75,6 @@ export default function App() {
   const [darkMode, setDarkMode] = useState(
     window.matchMedia('(prefers-color-scheme: dark)').matches,
   );
-  const routerBase = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   function handleToggleDark() {
     setDarkMode(prev => !prev);
@@ -83,22 +83,22 @@ export default function App() {
   return (
     <div className={darkMode ? 'dark' : ''}>
       <TestResultsProvider>
-        <BrowserRouter basename={routerBase}>
+        <BrowserRouter>
           <div className="min-h-screen bg-white dark:bg-gray-950">
             <Routes>
               {/* Test page gets full screen without nav */}
-              <Route path="/test" element={<TestPage />} />
+              <Route path={appPath('/test')} element={<TestPage />} />
               <Route
                 path="*"
                 element={
                   <>
                     <NavBar darkMode={darkMode} onToggleDark={handleToggleDark} />
                     <Routes>
-                      <Route path="/" element={<HomePage />} />
-                      <Route path="/browse" element={<BrowsePage />} />
-                      <Route path="/browse/:id" element={<LayoutDetailPage />} />
-                      <Route path="/about" element={<AboutPage />} />
-                      <Route path="/results" element={<ResultsPage />} />
+                      <Route path={appPath('/')} element={<HomePage />} />
+                      <Route path={appPath('/browse')} element={<BrowsePage />} />
+                      <Route path={appPath('/browse/:id')} element={<LayoutDetailPage />} />
+                      <Route path={appPath('/about')} element={<AboutPage />} />
+                      <Route path={appPath('/results')} element={<ResultsPage />} />
                     </Routes>
                   </>
                 }
