@@ -74,6 +74,7 @@ export default function App() {
   const [darkMode, setDarkMode] = useState(
     window.matchMedia('(prefers-color-scheme: dark)').matches,
   );
+  const routerBase = import.meta.env.BASE_URL;
 
   function handleToggleDark() {
     setDarkMode(prev => !prev);
@@ -82,7 +83,7 @@ export default function App() {
   return (
     <div className={darkMode ? 'dark' : ''}>
       <TestResultsProvider>
-        <BrowserRouter>
+        <BrowserRouter basename={routerBase}>
           <div className="min-h-screen bg-white dark:bg-gray-950">
             <Routes>
               {/* Test page gets full screen without nav */}
