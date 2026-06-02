@@ -21,10 +21,11 @@ function badgeClass(pct: number): string {
 
 function LayoutCardInner({ layout, matchPct, highlights }: LayoutCardProps) {
   const displayHighlights = highlights ?? [];
+  const detailHref = `${import.meta.env.BASE_URL}browse/${layout.id}`;
 
   return (
     <a
-      href={`./${layout.id}`}
+      href={detailHref}
       className="block rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 hover:shadow-md transition-shadow"
       aria-label={`View details for ${layout.name}`}
     >

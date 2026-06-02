@@ -16,6 +16,7 @@ function getMatchBadgeColor(pct: number): string {
 export function RecommendationCard({ ranked, rank }: RecommendationCardProps) {
   const { layout, matchPct, topReasons } = ranked;
   const badgeColor = getMatchBadgeColor(matchPct);
+  const detailHref = `${import.meta.env.BASE_URL}browse/${layout.id}`;
 
   return (
     <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-5 flex flex-col gap-4">
@@ -64,7 +65,7 @@ export function RecommendationCard({ ranked, rank }: RecommendationCardProps) {
 
       <div className="flex gap-2 flex-wrap">
         <a
-          href={`../browse/${layout.id}`}
+          href={detailHref}
           aria-label={`View full stats for ${layout.name}`}
           className="px-3 py-1.5 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-colors"
         >
