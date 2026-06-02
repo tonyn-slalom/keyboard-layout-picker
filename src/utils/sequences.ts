@@ -13,10 +13,10 @@ export const sequences: Sequence[] = [
   { id: 'warmup-05', category: 'redirect', text: 'swords', isWarmup: true,  thumbMode: false },
 
   // ─── alt (8) — strict hand alternation (L-R-L-R or R-L-R-L every bigram) ──
-  // t=L r=L i=R s=L h=R → turish: t(L)u(R)r(L)i(R)s(L)h(R) ✓
-  { id: 'alt-01', category: 'alt', text: 'turihs', isWarmup: false, thumbMode: false },
-  // d=L i=R s=L o=R n=R → disown: d(L)i(R)s(L)o(R)w(L)n(R) ✓
-  { id: 'alt-02', category: 'alt', text: 'diswon', isWarmup: false, thumbMode: false },
+  // s=L o=R f=L i=R t=L h=R → sofith: s(L)o(R)f(L)i(R)t(L)h(R) ✓
+  { id: 'alt-01', category: 'alt', text: 'sofith', isWarmup: false, thumbMode: false },
+  // g=L o=R f=L i=R s=L h=R → gofish: g(L)o(R)f(L)i(R)s(L)h(R) ✓
+  { id: 'alt-02', category: 'alt', text: 'gofish', isWarmup: false, thumbMode: false },
   // f=L u=R g=L l=R d=L k=R
   { id: 'alt-03', category: 'alt', text: 'fugldk', isWarmup: false, thumbMode: false },
   // r=L h=R e=L j=R w=L u=R
@@ -34,25 +34,25 @@ export const sequences: Sequence[] = [
   // Left hand pinky→index: a(0)→s(1)→d(2)→f(3)→g(4)
   // Right hand pinky→index: ;(9)→l(8)→k(7)→j(6)→h(5)
   { id: 'rollIn-01', category: 'rollIn', text: 'asdfun', isWarmup: false, thumbMode: false },
-  { id: 'rollIn-02', category: 'rollIn', text: 'sdfgio', isWarmup: false, thumbMode: false },
+  { id: 'rollIn-02', category: 'rollIn', text: 'sdfgjn', isWarmup: false, thumbMode: false },
   { id: 'rollIn-03', category: 'rollIn', text: 'zsdfin', isWarmup: false, thumbMode: false },
-  { id: 'rollIn-04', category: 'rollIn', text: 'xcvfon', isWarmup: false, thumbMode: false },
+  { id: 'rollIn-04', category: 'rollIn', text: 'xcvbon', isWarmup: false, thumbMode: false },
   { id: 'rollIn-05', category: 'rollIn', text: ';lkjhe', isWarmup: false, thumbMode: false },
-  { id: 'rollIn-06', category: 'rollIn', text: 'lkjhun', isWarmup: false, thumbMode: false },
-  { id: 'rollIn-07', category: 'rollIn', text: 'oiuyhn', isWarmup: false, thumbMode: false },
-  { id: 'rollIn-08', category: 'rollIn', text: 'polkji', isWarmup: false, thumbMode: false },
+  { id: 'rollIn-06', category: 'rollIn', text: 'lkjhas', isWarmup: false, thumbMode: false },
+  { id: 'rollIn-07', category: 'rollIn', text: 'oiuyas', isWarmup: false, thumbMode: false },
+  { id: 'rollIn-08', category: 'rollIn', text: 'poiuya', isWarmup: false, thumbMode: false },
 
   // ─── rollOut (8) — same hand, ≥3 keys moving index→pinky direction ─────────
   // Left hand index→pinky: f(3)→d(2)→s(1)→a(0)  or  g(4)→f(3)→d(2)→s(1)
   // Right hand index→pinky: h(5)→j(6)→k(7)→l(8)→;(9)
-  { id: 'rollOut-01', category: 'rollOut', text: 'gfdsoi', isWarmup: false, thumbMode: false },
-  { id: 'rollOut-02', category: 'rollOut', text: 'rfdsun', isWarmup: false, thumbMode: false },
-  { id: 'rollOut-03', category: 'rollOut', text: 'vfdsin', isWarmup: false, thumbMode: false },
+  { id: 'rollOut-01', category: 'rollOut', text: 'gfdshj', isWarmup: false, thumbMode: false },
+  { id: 'rollOut-02', category: 'rollOut', text: 'gfdshk', isWarmup: false, thumbMode: false },
+  { id: 'rollOut-03', category: 'rollOut', text: 'tfdsjk', isWarmup: false, thumbMode: false },
   { id: 'rollOut-04', category: 'rollOut', text: 'tfdsio', isWarmup: false, thumbMode: false },
-  { id: 'rollOut-05', category: 'rollOut', text: 'nhjklu', isWarmup: false, thumbMode: false },
-  { id: 'rollOut-06', category: 'rollOut', text: 'uhjkl;', isWarmup: false, thumbMode: false },
-  { id: 'rollOut-07', category: 'rollOut', text: 'mhjklo', isWarmup: false, thumbMode: false },
-  { id: 'rollOut-08', category: 'rollOut', text: 'yhjkls', isWarmup: false, thumbMode: false },
+  { id: 'rollOut-05', category: 'rollOut', text: 'hjklpd', isWarmup: false, thumbMode: false },
+  { id: 'rollOut-06', category: 'rollOut', text: 'yuklpf', isWarmup: false, thumbMode: false },
+  { id: 'rollOut-07', category: 'rollOut', text: 'gfdsjo', isWarmup: false, thumbMode: false },
+  { id: 'rollOut-08', category: 'rollOut', text: 'tfdshu', isWarmup: false, thumbMode: false },
 
   // ─── sfbStrong (8) — index or middle SFB: same finger, 2+ consecutive keys ─
   // LM (finger 2): e(top) d(home) c(bottom)  → ed, de, ec, ce, dc, cd
@@ -96,29 +96,29 @@ export const sequences: Sequence[] = [
   { id: 'lsb-07', category: 'lsb', text: 'bthone', isWarmup: false, thumbMode: false },
   { id: 'lsb-08', category: 'lsb', text: 'gynfer', isWarmup: false, thumbMode: false },
 
-  // ─── scissorsCenter (8) — top↔bottom row jump, same hand, no pinky ─────────
-  // LM: e(top)↔c(bottom), LI: r(top)↔v(bottom), LR: w(top)↔x(bottom)
-  // RM: i(top)↔,(bottom), RI: u(top)↔m(bottom), RR: o(top)↔.(bottom)
-  { id: 'scissorsCenter-01', category: 'scissorsCenter', text: 'ecuion', isWarmup: false, thumbMode: false },
-  { id: 'scissorsCenter-02', category: 'scissorsCenter', text: 'rvands', isWarmup: false, thumbMode: false },
-  { id: 'scissorsCenter-03', category: 'scissorsCenter', text: 'ceunoi', isWarmup: false, thumbMode: false },
-  { id: 'scissorsCenter-04', category: 'scissorsCenter', text: 'vrends', isWarmup: false, thumbMode: false },
-  { id: 'scissorsCenter-05', category: 'scissorsCenter', text: 'i,ants', isWarmup: false, thumbMode: false },
-  { id: 'scissorsCenter-06', category: 'scissorsCenter', text: 'umints', isWarmup: false, thumbMode: false },
-  { id: 'scissorsCenter-07', category: 'scissorsCenter', text: ',ionts', isWarmup: false, thumbMode: false },
-  { id: 'scissorsCenter-08', category: 'scissorsCenter', text: 'o.ands', isWarmup: false, thumbMode: false },
+  // ─── scissorsCenter (8) — adjacent non-pinky fingers, one top row + one bottom row ──
+  // L: LR(1)+LM(2) or LM(2)+LI(3) or LI(3)+LII(4); R: RII(5)+RI(6), RI(6)+RM(7), RM(7)+RR(8)
+  // DISTINCT from skipBigram (same finger) — here two ADJACENT different fingers cross rows
+  { id: 'scissorsCenter-01', category: 'scissorsCenter', text: 'evhisd', isWarmup: false, thumbMode: false },
+  { id: 'scissorsCenter-02', category: 'scissorsCenter', text: 'crjkla', isWarmup: false, thumbMode: false },
+  { id: 'scissorsCenter-03', category: 'scissorsCenter', text: 'wcuins', isWarmup: false, thumbMode: false },
+  { id: 'scissorsCenter-04', category: 'scissorsCenter', text: 'rcuind', isWarmup: false, thumbMode: false },
+  { id: 'scissorsCenter-05', category: 'scissorsCenter', text: 'ymadsi', isWarmup: false, thumbMode: false },
+  { id: 'scissorsCenter-06', category: 'scissorsCenter', text: 'nuadfs', isWarmup: false, thumbMode: false },
+  { id: 'scissorsCenter-07', category: 'scissorsCenter', text: 'u,dshi', isWarmup: false, thumbMode: false },
+  { id: 'scissorsCenter-08', category: 'scissorsCenter', text: 'i.fdsh', isWarmup: false, thumbMode: false },
 
-  // ─── scissorsPinky (8) — top↔bottom row jump, pinky is one end ─────────────
-  // LP: q(top)↔z(bottom), RP: p(top)↔/(bottom)
-  // Also: pinky home↔top/bottom counts as scissors when adjacent finger is cross-row
-  { id: 'scissorsPinky-01', category: 'scissorsPinky', text: 'qzands', isWarmup: false, thumbMode: false },
-  { id: 'scissorsPinky-02', category: 'scissorsPinky', text: 'zquion', isWarmup: false, thumbMode: false },
-  { id: 'scissorsPinky-03', category: 'scissorsPinky', text: 'qzeran', isWarmup: false, thumbMode: false },
-  { id: 'scissorsPinky-04', category: 'scissorsPinky', text: 'azniou', isWarmup: false, thumbMode: false },
-  { id: 'scissorsPinky-05', category: 'scissorsPinky', text: 'p/ants', isWarmup: false, thumbMode: false },
-  { id: 'scissorsPinky-06', category: 'scissorsPinky', text: '/panel', isWarmup: false, thumbMode: false },
-  { id: 'scissorsPinky-07', category: 'scissorsPinky', text: 'p/oles', isWarmup: false, thumbMode: false },
-  { id: 'scissorsPinky-08', category: 'scissorsPinky', text: '/pours', isWarmup: false, thumbMode: false },
+  // ─── scissorsPinky (8) — LP(0)+LR(1) or RR(8)+RP(9), adjacent cross-row ────
+  // L: q/a/z (LP) paired with w/s/x (LR) on a different row
+  // R: p/;// (RP) paired with o/l/. (RR) on a different row
+  { id: 'scissorsPinky-01', category: 'scissorsPinky', text: 'qxuind', isWarmup: false, thumbMode: false },
+  { id: 'scissorsPinky-02', category: 'scissorsPinky', text: 'zwjkla', isWarmup: false, thumbMode: false },
+  { id: 'scissorsPinky-03', category: 'scissorsPinky', text: 'awhjks', isWarmup: false, thumbMode: false },
+  { id: 'scissorsPinky-04', category: 'scissorsPinky', text: 'axhoud', isWarmup: false, thumbMode: false },
+  { id: 'scissorsPinky-05', category: 'scissorsPinky', text: 'p.asdf', isWarmup: false, thumbMode: false },
+  { id: 'scissorsPinky-06', category: 'scissorsPinky', text: '/ohdfs', isWarmup: false, thumbMode: false },
+  { id: 'scissorsPinky-07', category: 'scissorsPinky', text: ';ohifs', isWarmup: false, thumbMode: false },
+  { id: 'scissorsPinky-08', category: 'scissorsPinky', text: ';.fids', isWarmup: false, thumbMode: false },
 
   // ─── redirect (8) — same-hand 3+ key run that reverses direction ───────────
   // e.g. left hand: s→d→f then back f→d (roll-in then reverses)
@@ -127,17 +127,17 @@ export const sequences: Sequence[] = [
   { id: 'redirect-02', category: 'redirect', text: 'fgfdsn', isWarmup: false, thumbMode: false },
   { id: 'redirect-03', category: 'redirect', text: 'dsdfer', isWarmup: false, thumbMode: false },
   { id: 'redirect-04', category: 'redirect', text: 'asdsfu', isWarmup: false, thumbMode: false },
-  { id: 'redirect-05', category: 'redirect', text: 'jkljhn', isWarmup: false, thumbMode: false },
+  { id: 'redirect-05', category: 'redirect', text: 'jkljhd', isWarmup: false, thumbMode: false },
   { id: 'redirect-06', category: 'redirect', text: 'lkljon', isWarmup: false, thumbMode: false },
   { id: 'redirect-07', category: 'redirect', text: 'kjkhun', isWarmup: false, thumbMode: false },
   { id: 'redirect-08', category: 'redirect', text: 'hjhkon', isWarmup: false, thumbMode: false },
 
   // ─── pinky (8) — off-home pinky: key on top or bottom row (q, z, p, /) ─────
   { id: 'pinky-01', category: 'pinky', text: 'quartz', isWarmup: false, thumbMode: false },
-  { id: 'pinky-02', category: 'pinky', text: 'zapful', isWarmup: false, thumbMode: false },
-  { id: 'pinky-03', category: 'pinky', text: 'plaque', isWarmup: false, thumbMode: false },
-  { id: 'pinky-04', category: 'pinky', text: 'zephyr', isWarmup: false, thumbMode: false },
-  { id: 'pinky-05', category: 'pinky', text: 'polzip', isWarmup: false, thumbMode: false },
+  { id: 'pinky-02', category: 'pinky', text: 'zuplin', isWarmup: false, thumbMode: false },
+  { id: 'pinky-03', category: 'pinky', text: 'pulzin', isWarmup: false, thumbMode: false },
+  { id: 'pinky-04', category: 'pinky', text: 'zeplyr', isWarmup: false, thumbMode: false },
+  { id: 'pinky-05', category: 'pinky', text: 'pozlip', isWarmup: false, thumbMode: false },
   { id: 'pinky-06', category: 'pinky', text: 'quiz;n', isWarmup: false, thumbMode: false },
   { id: 'pinky-07', category: 'pinky', text: 'zipful', isWarmup: false, thumbMode: false },
   { id: 'pinky-08', category: 'pinky', text: 'proxyz', isWarmup: false, thumbMode: false },

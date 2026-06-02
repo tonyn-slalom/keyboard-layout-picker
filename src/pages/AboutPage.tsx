@@ -120,6 +120,48 @@ const CATEGORY_DETAILS: CategoryDetail[] = [
   },
 ];
 
+interface AlgorithmDetail {
+  heading: string;
+  body: string;
+  subpoints?: string[];
+  formula?: string;
+}
+
+const ALGORITHM_DETAILS: AlgorithmDetail[] = [
+  {
+    heading: 'Step 1 — What raw data is collected',
+    body: 'For each of the 12 motion categories, every inter-key interval (IKI) — the milliseconds between consecutive keypresses — is collected from your test sequences. Three signals are derived from that raw timing data:',
+    subpoints: [
+      'Trimmed Median IKI: the median keystroke interval after discarding the top 10% slowest values. Stripping the slowest intervals removes hesitation pauses and distractions so they do not inflate the difficulty reading. Lower IKI = you flowed through that motion more naturally.',
+      'Coefficient of Variation (CV = stddev ÷ mean): measures rhythm consistency. Low CV means your timing was steady and in a groove; high CV means some keystrokes were fast and others lagged, signaling the motion required conscious effort.',
+      'Median Error Count: median mistakes per sequence. Using the median makes the result resistant to one outlier sequence that went badly.',
+    ],
+    formula: 'profile[cat] = 0.5 × IKI score  +  0.25 × consistency score  +  0.25 × accuracy score',
+  },
+  {
+    heading: 'Step 1b — Cross-category normalization',
+    body: 'All three signals are min-max normalized across all 12 categories together — not against an external benchmark. Your fastest category scores near 1.0 even if you type slowly overall. The profile captures which motions feel natural relative to your own baseline, so two typists at different speeds can still get accurate personalized recommendations.',
+  },
+  {
+    heading: 'Step 2 — Matching your profile to layout statistics',
+    body: 'Each layout has measured ergonomic statistics (SFB%, roll%, redirect%, etc.). For every category the algorithm asks whether the layout and your preferences align:',
+    subpoints: [
+      'Positive category (alt, rolls, thumbAlt): contribution = your_score × normalized_stat. High only when you perform well in that motion AND the layout has a lot of it.',
+      'Negative category (SFB, scissors, redirects, pinky, etc.): contribution = (1 − your_score) × (1 − normalized_stat). High only when you struggle with that motion AND the layout minimizes it.',
+    ],
+    formula: 'compatibility = average of all 12 category contributions',
+  },
+  {
+    heading: 'Step 3 — Optional QWERTY similarity boost',
+    body: 'If the learning-curve toggle is enabled, the final score blends layout compatibility with a similarity score that measures how much key positioning overlaps with QWERTY. This nudges recommendations toward layouts that require less muscle-memory retraining.',
+    formula: 'final score = 0.8 × compatibility  +  0.2 × QWERTY similarity',
+  },
+  {
+    heading: 'Step 4 — Ranking and tie-breaking',
+    body: 'Layouts are sorted by final score descending. In the case of a true numerical tie, the layout with the lower SFB% wins — a universal ergonomic benefit that helps everyone regardless of individual preference. The top 3 highest-contributing categories for each layout become the "top reasons" shown on your results card.',
+  },
+];
+
 const LAYOUT_DATA_NOTES: string[] = [
   'Layout stats are sourced from curated ergonomic references and mapped into a common schema for fair comparison.',
   'KLP stores multiple movement metrics including SFB, LSB, scissors, alternation, rolls, redirects, skip bigrams, and pinky/off-home indicators.',
@@ -171,6 +213,30 @@ for (const sequence of sequences) {
 function getSequenceTooltip(categoryId: CategoryId) {
   const categorySequences = CATEGORY_SEQUENCE_MAP[categoryId];
   return `Scored test sequences (${categorySequences.length}): ${categorySequences.join(', ')}`;
+}
+
+function renderAlgorithmDetail(detail: AlgorithmDetail) {
+  return (
+    <article key={detail.heading} className="rounded-2xl border border-gray-200 p-5 dark:border-gray-800">
+      <h3 className="text-base font-semibold text-gray-900 dark:text-white">{detail.heading}</h3>
+      <p className="mt-2 text-sm leading-6 text-gray-700 dark:text-gray-300">{detail.body}</p>
+      {detail.subpoints && (
+        <ul className="mt-3 space-y-2">
+          {detail.subpoints.map(point => (
+            <li key={point} className="flex gap-3 text-sm leading-6 text-gray-700 dark:text-gray-300">
+              <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-500" />
+              <span>{point}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+      {detail.formula && (
+        <code className="mt-4 block rounded-lg bg-gray-100 px-4 py-2.5 text-xs font-mono text-gray-800 dark:bg-gray-800/60 dark:text-gray-200">
+          {detail.formula}
+        </code>
+      )}
+    </article>
+  );
 }
 
 function renderTypeBadge(type: CategoryDetail['type']) {
@@ -267,6 +333,16 @@ export default function AboutPage() {
               <p className="mt-2 text-sm leading-6 text-gray-700 dark:text-gray-300">{step.body}</p>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="mx-auto w-full max-w-6xl px-4 pb-12 sm:px-6 lg:px-8">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Scoring algorithm in depth</h2>
+        <p className="mt-3 max-w-4xl text-sm leading-6 text-gray-700 dark:text-gray-300">
+          How KLP turns raw keystroke timing into a personalized layout ranking — step by step.
+        </p>
+        <div className="mt-6 space-y-4">
+          {ALGORITHM_DETAILS.map(renderAlgorithmDetail)}
         </div>
       </section>
 

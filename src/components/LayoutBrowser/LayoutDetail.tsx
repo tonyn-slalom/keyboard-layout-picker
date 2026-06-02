@@ -5,7 +5,6 @@ import { TryoutPanel } from '../Tryout/TryoutPanel';
 
 interface LayoutDetailProps {
   layout: Layout;
-  allLayouts: Layout[];
 }
 
 const STAT_ROWS: Array<{ label: string; key: keyof Layout['stats']; isGoodLow?: boolean }> = [

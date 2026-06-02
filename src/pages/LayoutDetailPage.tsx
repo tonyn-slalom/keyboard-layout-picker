@@ -15,7 +15,7 @@ export default function LayoutDetailPage() {
 
   return (
     <main className="min-h-screen bg-gray-50 dark:bg-gray-950 px-4 py-8">
-      <LayoutDetail layout={layout} allLayouts={layouts} />
+      <LayoutDetail layout={layout} />
     </main>
   );
 }

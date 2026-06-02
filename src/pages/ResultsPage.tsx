@@ -160,14 +160,13 @@ function DebugPanel({ ranked, qwertyBoost }: DebugPanelProps) {
 
 interface ProfileEditorProps {
   activeProfile: Record<CategoryId, number>;
-  testProfile: Record<CategoryId, number>;
   isEditable: boolean;
   hasTestData: boolean;
   onCategoryChange: (cat: CategoryId, value: number) => void;
   onReset: () => void;
 }
 
-function ProfileEditor({ activeProfile, isEditable, hasTestData, onCategoryChange, onReset }: Omit<ProfileEditorProps, 'testProfile'> & { testProfile?: Record<CategoryId, number> }) {
+function ProfileEditor({ activeProfile, isEditable, hasTestData, onCategoryChange, onReset }: ProfileEditorProps) {
   const positives = CATEGORY_IDS.filter(c => POSITIVE_CATEGORIES.has(c));
   const negatives = CATEGORY_IDS.filter(c => !POSITIVE_CATEGORIES.has(c));
 
@@ -478,7 +477,6 @@ function ResultsPageInner({ urlSeed }: ResultsPageInnerProps) {
         {/* Profile editor */}
         <ProfileEditor
           activeProfile={ctrl.activeProfile}
-          testProfile={ctrl.testProfile}
           isEditable={ctrl.isManualMode}
           hasTestData={state.results.length > 0}
           onCategoryChange={ctrl.handleCategoryChange}
